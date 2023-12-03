@@ -18,16 +18,17 @@ struct ContentView: View {
     var body: some View {
         VStack {
             
-//            Text(scannedQRCode)
+            //            Text(scannedQRCode)
             Button("Scan QR Code with Camera"){
                 self.isPresentingScannerView = true
             }
             .sheet(isPresented: $isPresentingScannerView){
                 ScannerView(isPresentingScannerView: $isPresentingScannerView)
             }
-//            Text("items:\(parsedProducts.count)")
+            
         }
     }
+    
 }
 
 #Preview {

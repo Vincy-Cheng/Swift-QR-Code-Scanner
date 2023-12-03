@@ -11,8 +11,8 @@ import CodeScanner
 struct ScannerView: View {
     // TODO: Create the Confirm button to make purchase log
     @Binding var isPresentingScannerView:Bool
-    @State private var parsedProducts: [Product] = []
-    
+    @State var parsedProducts: [Product] = []
+
     private var totalValue: Double {
         parsedProducts.reduce(0) { $0 + $1.value }
     }
@@ -24,6 +24,7 @@ struct ScannerView: View {
     private func removeProduct(at index: Int) {
         parsedProducts.remove(at: index)
     }
+    
     
     var body: some View{
         VStack{
@@ -43,6 +44,7 @@ struct ScannerView: View {
             })
             
             .frame(height: UIScreen.main.bounds.height / 3)
+            AddPurchaseLogView(parsedProducts: $parsedProducts,isPresentingScannerView: $isPresentingScannerView)
             Text("Total Value: \(formattedTotalValue)") // Displaying the formatted total value
                 .font(.headline)
                 .padding()

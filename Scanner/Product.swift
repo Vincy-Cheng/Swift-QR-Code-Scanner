@@ -14,23 +14,23 @@ struct Product: Codable,Identifiable {
     let owner: String
     
     // Custom initializer for decoding
-        init(from decoder: Decoder) throws {
-            // Create a container to access the JSON properties
-            let container = try decoder.container(keyedBy: CodingKeys.self)
-            
-            // Decode other properties (value, name, owner)
-            value = try container.decode(Double.self, forKey: .value)
-            name = try container.decode(String.self, forKey: .name)
-            owner = try container.decode(String.self, forKey: .owner)
-            
-            // Assign a UUID during decoding
-            id = UUID()
-        }
+    init(from decoder: Decoder) throws {
+        // Create a container to access the JSON properties
+        let container = try decoder.container(keyedBy: CodingKeys.self)
         
-        // CodingKeys to map properties to keys in JSON
-        private enum CodingKeys: String, CodingKey {
-            case value, name, owner
-        }
+        // Decode other properties (value, name, owner)
+        value = try container.decode(Double.self, forKey: .value)
+        name = try container.decode(String.self, forKey: .name)
+        owner = try container.decode(String.self, forKey: .owner)
+        
+        // Assign a UUID during decoding
+        id = UUID()
+    }
+    
+    // CodingKeys to map properties to keys in JSON
+    private enum CodingKeys: String, CodingKey {
+        case value, name, owner
+    }
 }
 
 func parseJSON(from string: String) -> Product? {
@@ -42,6 +42,19 @@ func parseJSON(from string: String) -> Product? {
         return product
     } catch {
         print("Error decoding JSON: \(error)")
+        return nil
+    }
+}
+
+func stringifyObject(products: [Product]) -> String? {
+    
+    do{
+        let jsonEncoder = JSONEncoder()
+        let jsonData = try jsonEncoder.encode(products)
+        let json = String(data: jsonData, encoding: String.Encoding.utf8)
+        return json
+    }catch{
+        print("Error ： \(error)")
         return nil
     }
 }

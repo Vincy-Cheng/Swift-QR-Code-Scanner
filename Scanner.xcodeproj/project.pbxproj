@@ -17,6 +17,10 @@
 		037C8CD52B122C7D005F3DF6 /* ScannerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 037C8CD42B122C7D005F3DF6 /* ScannerUITests.swift */; };
 		037C8CD72B122C7D005F3DF6 /* ScannerUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 037C8CD62B122C7D005F3DF6 /* ScannerUITestsLaunchTests.swift */; };
 		037C8D2D2B13C5B1005F3DF6 /* CodeScanner in Frameworks */ = {isa = PBXBuildFile; productRef = 037C8D2C2B13C5B1005F3DF6 /* CodeScanner */; };
+		03CC81892B1CA6B8003CD327 /* PurchaseLog.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 03CC81872B1CA6B8003CD327 /* PurchaseLog.xcdatamodeld */; };
+		03CC81952B1CD0D2003CD327 /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03CC81942B1CD0D2003CD327 /* DataController.swift */; };
+		03CC81992B1CD353003CD327 /* ListPurchaseLogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03CC81982B1CD353003CD327 /* ListPurchaseLogView.swift */; };
+		03CC819C2B1CD4B4003CD327 /* AddPurchaseLogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03CC819B2B1CD4B4003CD327 /* AddPurchaseLogView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +53,10 @@
 		037C8CD02B122C7D005F3DF6 /* ScannerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ScannerUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		037C8CD42B122C7D005F3DF6 /* ScannerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScannerUITests.swift; sourceTree = "<group>"; };
 		037C8CD62B122C7D005F3DF6 /* ScannerUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScannerUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		03CC81882B1CA6B8003CD327 /* PurchaseLog.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = PurchaseLog.xcdatamodel; sourceTree = "<group>"; };
+		03CC81942B1CD0D2003CD327 /* DataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
+		03CC81982B1CD353003CD327 /* ListPurchaseLogView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListPurchaseLogView.swift; sourceTree = "<group>"; };
+		03CC819B2B1CD4B4003CD327 /* AddPurchaseLogView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPurchaseLogView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,10 +109,10 @@
 			isa = PBXGroup;
 			children = (
 				037C8CB92B122C7C005F3DF6 /* ScannerApp.swift */,
-				037C8CBB2B122C7C005F3DF6 /* ContentView.swift */,
-				03598D682B1638F000739FEF /* ScannerView.swift */,
-				03598D662B16330000739FEF /* Product.swift */,
+				03CC81932B1CD077003CD327 /* DataModel */,
+				03CC819A2B1CD439003CD327 /* Views */,
 				037C8CBD2B122C7D005F3DF6 /* Assets.xcassets */,
+				03598D662B16330000739FEF /* Product.swift */,
 				037C8CBF2B122C7D005F3DF6 /* Preview Content */,
 			);
 			path = Scanner;
@@ -133,6 +141,26 @@
 				037C8CD62B122C7D005F3DF6 /* ScannerUITestsLaunchTests.swift */,
 			);
 			path = ScannerUITests;
+			sourceTree = "<group>";
+		};
+		03CC81932B1CD077003CD327 /* DataModel */ = {
+			isa = PBXGroup;
+			children = (
+				03CC81872B1CA6B8003CD327 /* PurchaseLog.xcdatamodeld */,
+				03CC81942B1CD0D2003CD327 /* DataController.swift */,
+			);
+			path = DataModel;
+			sourceTree = "<group>";
+		};
+		03CC819A2B1CD439003CD327 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				037C8CBB2B122C7C005F3DF6 /* ContentView.swift */,
+				03598D682B1638F000739FEF /* ScannerView.swift */,
+				03CC81982B1CD353003CD327 /* ListPurchaseLogView.swift */,
+				03CC819B2B1CD4B4003CD327 /* AddPurchaseLogView.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -272,8 +300,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				037C8CBC2B122C7C005F3DF6 /* ContentView.swift in Sources */,
+				03CC81992B1CD353003CD327 /* ListPurchaseLogView.swift in Sources */,
+				03CC81952B1CD0D2003CD327 /* DataController.swift in Sources */,
 				03598D692B1638F000739FEF /* ScannerView.swift in Sources */,
+				03CC819C2B1CD4B4003CD327 /* AddPurchaseLogView.swift in Sources */,
 				037C8CBA2B122C7C005F3DF6 /* ScannerApp.swift in Sources */,
+				03CC81892B1CA6B8003CD327 /* PurchaseLog.xcdatamodeld in Sources */,
 				03598D672B16330000739FEF /* Product.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -629,6 +661,19 @@
 			productName = CodeScanner;
 		};
 /* End XCSwiftPackageProductDependency section */
+
+/* Begin XCVersionGroup section */
+		03CC81872B1CA6B8003CD327 /* PurchaseLog.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				03CC81882B1CA6B8003CD327 /* PurchaseLog.xcdatamodel */,
+			);
+			currentVersion = 03CC81882B1CA6B8003CD327 /* PurchaseLog.xcdatamodel */;
+			path = PurchaseLog.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 037C8CAE2B122C7C005F3DF6 /* Project object */;
 }

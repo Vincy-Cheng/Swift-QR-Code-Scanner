@@ -42,12 +42,14 @@ struct ScannerView: View {
                     
                 }
             })
-            
             .frame(height: UIScreen.main.bounds.height / 3)
+            
             AddPurchaseLogView(parsedProducts: $parsedProducts,isPresentingScannerView: $isPresentingScannerView)
+            
             Text("Total Value: \(formattedTotalValue)") // Displaying the formatted total value
                 .font(.headline)
                 .padding()
+            
             List {
                 ForEach(Array(parsedProducts.enumerated()), id: \.1.id) { index, product in
                     HStack(){

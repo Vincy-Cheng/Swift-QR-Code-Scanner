@@ -13,24 +13,45 @@ struct Product: Codable,Identifiable {
     let name: String
     let owner: String
     
+    // Manually create Product
+    init(id: UUID = UUID(), value: Double, name: String, owner: String) {
+        self.id = id
+        self.value = value
+        self.name = name
+        self.owner = owner
+    }
+    
+    // CodingKeys to map properties to keys in JSON
+    enum CodingKeys: String, CodingKey {
+        case  value, name, owner
+    }
+    
     // Custom initializer for decoding
     init(from decoder: Decoder) throws {
-        // Create a container to access the JSON properties
         let container = try decoder.container(keyedBy: CodingKeys.self)
         
-        // Decode other properties (value, name, owner)
         value = try container.decode(Double.self, forKey: .value)
         name = try container.decode(String.self, forKey: .name)
         owner = try container.decode(String.self, forKey: .owner)
         
-        // Assign a UUID during decoding
+        // Assign a default UUID since it's not present in the JSON
         id = UUID()
     }
     
-    // CodingKeys to map properties to keys in JSON
-    private enum CodingKeys: String, CodingKey {
-        case value, name, owner
+    // Manual implementation of Encodable
+    enum EncodingKeys: String, CodingKey {
+        case id, value, name, owner
     }
+    
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: EncodingKeys.self)
+        
+        try container.encode(id, forKey: .id)
+        try container.encode(value, forKey: .value)
+        try container.encode(name, forKey: .name)
+        try container.encode(owner, forKey: .owner)
+    }
+    
 }
 
 func parseJSON(from string: String) -> Product? {

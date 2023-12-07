@@ -8,64 +8,70 @@
 import SwiftUI
 import CoreData
 
+func formattedDate(from date: Date) -> String {
+    let dateFormatter = DateFormatter()
+    dateFormatter.dateFormat = "MMM d, yyyy - HH:mm:ss"
+    return dateFormatter.string(from: date)
+}
+
 struct ListPurchaseLogView:View {
-    @Environment (\.managedObjectContext) var managedObjectContext
+    
     @FetchRequest(sortDescriptors: [NSSortDescriptor(key: "id", ascending: true)]) var purchaseLogs: FetchedResults<PurchaseLog>
-    
-    @State private var showAlert = false
-    @State private var selectedOption: String? = nil
-    
-    // TODO: Complete the display view format
-    //     - Group by date
-    //     - Navigation to view detail
-    //     - Delete option
-    
-    // Only need to view and delete (or may be update)
+ 
+    @State private var selectedOption: String = "Owners"
+
     var body: some View{
-        NavigationView{
-            VStack(alignment: .leading)
-            {
+        if selectedOption == "Owners" {
+            let products = Array(purchaseLogs)
+            let parsedProducts:[Product]? = parsePurchaseLogs(purchaseLogs: products)
+            if let parsedProducts{
+                let owners = Array(Set(parsedProducts.map { $0.owner })).sorted()
                 
-                Text("\(purchaseLogs.count)")
-                List{
-                    ForEach(purchaseLogs) {
-                        log in VStack(alignment:.leading){
-                            Text("Test")
-                            Button(action: {
-                                showAlert = true
-                            }) {
-                                Image(systemName: "trash")
-                                    .foregroundColor(.red)
-                            }.alert(isPresented: $showAlert) {
-                                Alert(
-                                    title: Text("Confirm Deletion"),
-                                    message: Text("Confirm to delete this record"),
-                                    primaryButton: .destructive(Text("Delete")) {
-                                        // Call the deletion function here
-                                        managedObjectContext.delete(log)
-                                        DataController().save(context: managedObjectContext)
-                                    },
-                                    secondaryButton: .cancel()
-                                    
-                                )
-                            }
-                        }
+                List(owners, id: \.self) { owner in
+                    NavigationLink(destination: GroupedProductsView(owner: owner, products: parsedProducts.filter { $0.owner == owner })) {
+                        Text("Owner: \(owner)")
                     }
                 }
+                .navigationBarTitle(selectedOption)
+                .toolbar {
+                    Menu {
+                        Section("Group by") {
+                            Button("Date") { selectedOption = "Date"  }
+                            Button("Owner") { selectedOption = "Owners" }
+                        }
+                    } label: {
+                        Label("Menu", systemImage: "square.grid.3x3.topleft.filled")
+                    }}
+            } else {
+                Text("Error parsing products")
             }
-        }.toolbar {
-            Menu {
-                Section("Group by") {
-                    Button("Date") { selectedOption = "Date"  }
-                    Button("Owner") { selectedOption = "Owner" }
+        }
+        else{
+            List{
+                ForEach(purchaseLogs.sorted(by: { $0.createdAt! > $1.createdAt! }), id: \.self) {
+                    log in
+                    if let createdAt = log.createdAt {
+                        NavigationLink(destination: PurchaseLogView(purchaseLog: log)) {
+                            Text("Purchase Log: \(formattedDate(from: createdAt))")
+                        }
+                        
+                    }
+                    
                 }
-            } label: {
-                Label("Menu", systemImage: "square.grid.3x3.topleft.filled")
-            }
+            }.toolbar {
+                Menu {
+                    Section("Group by") {
+                        Button("Date") { selectedOption = "Date"  }
+                        Button("Owner") { selectedOption = "Owners" }
+                    }
+                } label: {
+                    Label("Menu", systemImage: "square.grid.3x3.topleft.filled")
+                }}
         }
         
         
     }
+    
     
 }
 struct ListPurchaseLogView_Previews:PreviewProvider{

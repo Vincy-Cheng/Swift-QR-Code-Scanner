@@ -21,6 +21,8 @@
 		03CC81952B1CD0D2003CD327 /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03CC81942B1CD0D2003CD327 /* DataController.swift */; };
 		03CC81992B1CD353003CD327 /* ListPurchaseLogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03CC81982B1CD353003CD327 /* ListPurchaseLogView.swift */; };
 		03CC819C2B1CD4B4003CD327 /* AddPurchaseLogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03CC819B2B1CD4B4003CD327 /* AddPurchaseLogView.swift */; };
+		03F76EC62B21B5790072FE8E /* GroupedProductsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03F76EC52B21B5790072FE8E /* GroupedProductsView.swift */; };
+		03F76EC82B21CD9D0072FE8E /* PurchaseLogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03F76EC72B21CD9D0072FE8E /* PurchaseLogView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,6 +59,8 @@
 		03CC81942B1CD0D2003CD327 /* DataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
 		03CC81982B1CD353003CD327 /* ListPurchaseLogView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListPurchaseLogView.swift; sourceTree = "<group>"; };
 		03CC819B2B1CD4B4003CD327 /* AddPurchaseLogView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPurchaseLogView.swift; sourceTree = "<group>"; };
+		03F76EC52B21B5790072FE8E /* GroupedProductsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupedProductsView.swift; sourceTree = "<group>"; };
+		03F76EC72B21CD9D0072FE8E /* PurchaseLogView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseLogView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -158,6 +162,8 @@
 				037C8CBB2B122C7C005F3DF6 /* ContentView.swift */,
 				03598D682B1638F000739FEF /* ScannerView.swift */,
 				03CC81982B1CD353003CD327 /* ListPurchaseLogView.swift */,
+				03F76EC52B21B5790072FE8E /* GroupedProductsView.swift */,
+				03F76EC72B21CD9D0072FE8E /* PurchaseLogView.swift */,
 				03CC819B2B1CD4B4003CD327 /* AddPurchaseLogView.swift */,
 			);
 			path = Views;
@@ -300,6 +306,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				037C8CBC2B122C7C005F3DF6 /* ContentView.swift in Sources */,
+				03F76EC62B21B5790072FE8E /* GroupedProductsView.swift in Sources */,
+				03F76EC82B21CD9D0072FE8E /* PurchaseLogView.swift in Sources */,
 				03CC81992B1CD353003CD327 /* ListPurchaseLogView.swift in Sources */,
 				03CC81952B1CD0D2003CD327 /* DataController.swift in Sources */,
 				03598D692B1638F000739FEF /* ScannerView.swift in Sources */,

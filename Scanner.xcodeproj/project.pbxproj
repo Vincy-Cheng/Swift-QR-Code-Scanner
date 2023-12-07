@@ -61,6 +61,7 @@
 		03CC819B2B1CD4B4003CD327 /* AddPurchaseLogView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPurchaseLogView.swift; sourceTree = "<group>"; };
 		03F76EC52B21B5790072FE8E /* GroupedProductsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupedProductsView.swift; sourceTree = "<group>"; };
 		03F76EC72B21CD9D0072FE8E /* PurchaseLogView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseLogView.swift; sourceTree = "<group>"; };
+		03F76EC92B2217A60072FE8E /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -92,6 +93,7 @@
 		037C8CAD2B122C7C005F3DF6 = {
 			isa = PBXGroup;
 			children = (
+				03F76EC92B2217A60072FE8E /* README.md */,
 				037C8CB82B122C7C005F3DF6 /* Scanner */,
 				037C8CC92B122C7D005F3DF6 /* ScannerTests */,
 				037C8CD32B122C7D005F3DF6 /* ScannerUITests */,

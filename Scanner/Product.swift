@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Product: Codable,Identifiable {
+struct Product: Codable,Identifiable, Equatable {
     let id: UUID
     let value: Double
     let name: String
@@ -54,19 +54,21 @@ struct Product: Codable,Identifiable {
     
 }
 
-func parseJSON(from string: String) -> Product? {
+// Decode JSON string
+func parseJSON(from string: String) -> [Product]? {
     guard let jsonData = string.data(using: .utf8) else { return nil }
     do {
         let decoder = JSONDecoder()
-        let product = try decoder.decode(Product.self, from: jsonData)
+        let products = try decoder.decode([Product].self, from: jsonData)
         
-        return product
+        return products
     } catch {
         print("Error decoding JSON: \(error)")
         return nil
     }
 }
 
+// Encode JSON string
 func stringifyObject(products: [Product]) -> String? {
     
     do{
@@ -78,4 +80,11 @@ func stringifyObject(products: [Product]) -> String? {
         print("Error ： \(error)")
         return nil
     }
+}
+
+// Parse the encoded products into Product instance array
+func parsePurchaseLogs(purchaseLogs: [PurchaseLog]) -> [Product]? {
+    let stringifiedArray = purchaseLogs.map { $0.content }
+    let productsArray = stringifiedArray.compactMap { parseJSON(from: $0!) }
+    return productsArray.flatMap { $0 }
 }

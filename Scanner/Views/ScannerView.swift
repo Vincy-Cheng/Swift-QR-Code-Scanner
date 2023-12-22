@@ -12,6 +12,7 @@ struct ScannerView: View {
     // TODO: Create the Confirm button to make purchase log
     @Binding var isPresentingScannerView:Bool
     @State var parsedProducts: [Product] = []
+    @State private var showAlert = false
     
     private var totalValue: Double {
         parsedProducts.reduce(0) { $0 + $1.value }
@@ -48,11 +49,28 @@ struct ScannerView: View {
             
             CodeScannerView(codeTypes: [.qr],scanMode: ScanMode.continuous, completion: { result in
                 if case let .success(code) = result {
-                    self.parsedProducts.append(contentsOf:parseJSON(from: code.string)!)
+                    let res:[Product]? = parseJSON(from: code.string)
+                    if let res{
+                        self.parsedProducts.append(contentsOf:res)
+                    }
+                    else{
+                        showAlert = true
+                    }
+                    
                     
                 }
             })
             .frame(height: UIScreen.main.bounds.height / 3)
+            .alert(isPresented: $showAlert) {
+                // Alert user if there is no item is added
+                Alert(
+                    title: Text("Invalid QR code"),
+                    message: Text("Please provide an valid QR code"),
+                    dismissButton: .default(Text("OK")) {
+                        showAlert = false // Dismiss the alert when OK is tapped
+                    }
+                )
+            }
             
             AddPurchaseLogView(parsedProducts: $parsedProducts,isPresentingScannerView: $isPresentingScannerView)
             

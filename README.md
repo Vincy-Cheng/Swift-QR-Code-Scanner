@@ -15,14 +15,14 @@ Please follow Product class to create the QR code.
     }]
 
 ## Screenshots
-![IMG_8FFA68CBD8A2-1](https://github.com/Vincy-Cheng/Swift-QR-Code-Scanner/assets/60846680/50458fc1-6732-41b0-ae66-24712c1080b6)
+![288806969-a63f546d-639c-467a-a748-afce98064a10](https://github.com/Vincy-Cheng/Swift-QR-Code-Scanner/assets/60846680/c2f09c74-8dbe-4aac-ab3f-bc020715d9bd)
 
-![IMG_8978D8F34506-1](https://github.com/Vincy-Cheng/Swift-QR-Code-Scanner/assets/60846680/0690dcae-a9eb-4996-a109-fa7a9ba949f2)
+![288807039-0690dcae-a9eb-4996-a109-fa7a9ba949f2](https://github.com/Vincy-Cheng/Swift-QR-Code-Scanner/assets/60846680/b65ba42b-6984-4d97-abbb-04d21fd21425)
 
-![IMG_20C529654801-1](https://github.com/Vincy-Cheng/Swift-QR-Code-Scanner/assets/60846680/a63f546d-639c-467a-a748-afce98064a10)
+![288806969-a63f546d-639c-467a-a748-afce98064a10](https://github.com/Vincy-Cheng/Swift-QR-Code-Scanner/assets/60846680/c3540822-7b6e-4f7c-9d4e-03ba58f4b976)
 
-![IMG_ABAD91C864EA-1](https://github.com/Vincy-Cheng/Swift-QR-Code-Scanner/assets/60846680/2853b887-794d-41c9-b253-34f6fc3f1a87)
+![288807101-2853b887-794d-41c9-b253-34f6fc3f1a87](https://github.com/Vincy-Cheng/Swift-QR-Code-Scanner/assets/60846680/382a6e86-6124-4f64-8111-1710275f18dc)
 
-![IMG_9D09B6CF10BE-1](https://github.com/Vincy-Cheng/Swift-QR-Code-Scanner/assets/60846680/863c7ba4-86d1-4d61-90be-06d4d2227197)
+![288807170-863c7ba4-86d1-4d61-90be-06d4d2227197](https://github.com/Vincy-Cheng/Swift-QR-Code-Scanner/assets/60846680/9e80f722-1052-492a-84cd-36abb6b3cefc)
 
-![IMG_1E89B6423661-1](https://github.com/Vincy-Cheng/Swift-QR-Code-Scanner/assets/60846680/2ecfd1e1-f2e6-4b94-ae5a-e0ba4a18a9d9)
+![288807200-2ecfd1e1-f2e6-4b94-ae5a-e0ba4a18a9d9](https://github.com/Vincy-Cheng/Swift-QR-Code-Scanner/assets/60846680/301c3185-51fc-418d-a6e5-ea9b2e922aff)

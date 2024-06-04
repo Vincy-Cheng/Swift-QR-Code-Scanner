@@ -7,8 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		03587D6F2C0C4F3D000C0B04 /* ButtonListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03587D6E2C0C4F3D000C0B04 /* ButtonListView.swift */; };
-		03587D762C0CBAF6000C0B04 /* Container.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 03587D742C0CBAF6000C0B04 /* Container.xcdatamodeld */; };
+		030915512C0F6E0D009767FA /* Container.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 0309154F2C0F6E0D009767FA /* Container.xcdatamodeld */; };
+		0309155B2C0F79F7009767FA /* OwnerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0309155A2C0F79F7009767FA /* OwnerController.swift */; };
+		0309155D2C0F7A0A009767FA /* PurchaseLogController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0309155C2C0F7A0A009767FA /* PurchaseLogController.swift */; };
+		03587D6F2C0C4F3D000C0B04 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03587D6E2C0C4F3D000C0B04 /* HomeView.swift */; };
+		03587D7B2C0E1057000C0B04 /* ListOwnerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03587D7A2C0E1057000C0B04 /* ListOwnerView.swift */; };
 		03598D672B16330000739FEF /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03598D662B16330000739FEF /* Product.swift */; };
 		03598D692B1638F000739FEF /* ScannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03598D682B1638F000739FEF /* ScannerView.swift */; };
 		037C8CBA2B122C7C005F3DF6 /* ScannerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 037C8CB92B122C7C005F3DF6 /* ScannerApp.swift */; };
@@ -44,8 +47,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		03587D6E2C0C4F3D000C0B04 /* ButtonListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonListView.swift; sourceTree = "<group>"; };
-		03587D752C0CBAF6000C0B04 /* PurchaseLog.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = PurchaseLog.xcdatamodel; sourceTree = "<group>"; };
+		030915502C0F6E0D009767FA /* PurchaseLog.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = PurchaseLog.xcdatamodel; sourceTree = "<group>"; };
+		0309155A2C0F79F7009767FA /* OwnerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OwnerController.swift; sourceTree = "<group>"; };
+		0309155C2C0F7A0A009767FA /* PurchaseLogController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseLogController.swift; sourceTree = "<group>"; };
+		03587D6E2C0C4F3D000C0B04 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		03587D7A2C0E1057000C0B04 /* ListOwnerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListOwnerView.swift; sourceTree = "<group>"; };
 		03598D662B16330000739FEF /* Product.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Product.swift; sourceTree = "<group>"; };
 		03598D682B1638F000739FEF /* ScannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScannerView.swift; sourceTree = "<group>"; };
 		037C8CB62B122C7C005F3DF6 /* Scanner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Scanner.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -92,6 +98,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		03587D772C0E1035000C0B04 /* Users */ = {
+			isa = PBXGroup;
+			children = (
+				03587D7A2C0E1057000C0B04 /* ListOwnerView.swift */,
+			);
+			path = Users;
+			sourceTree = "<group>";
+		};
 		037C8CAD2B122C7C005F3DF6 = {
 			isa = PBXGroup;
 			children = (
@@ -155,7 +169,9 @@
 			isa = PBXGroup;
 			children = (
 				03CC81942B1CD0D2003CD327 /* DataController.swift */,
-				03587D742C0CBAF6000C0B04 /* Container.xcdatamodeld */,
+				0309155C2C0F7A0A009767FA /* PurchaseLogController.swift */,
+				0309155A2C0F79F7009767FA /* OwnerController.swift */,
+				0309154F2C0F6E0D009767FA /* Container.xcdatamodeld */,
 			);
 			path = DataModel;
 			sourceTree = "<group>";
@@ -163,8 +179,9 @@
 		03CC819A2B1CD439003CD327 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				03587D6E2C0C4F3D000C0B04 /* ButtonListView.swift */,
+				03587D6E2C0C4F3D000C0B04 /* HomeView.swift */,
 				037C8CBB2B122C7C005F3DF6 /* ContentView.swift */,
+				03587D772C0E1035000C0B04 /* Users */,
 				03598D682B1638F000739FEF /* ScannerView.swift */,
 				03CC81982B1CD353003CD327 /* ListPurchaseLogView.swift */,
 				03F76EC52B21B5790072FE8E /* GroupedProductsView.swift */,
@@ -314,11 +331,14 @@
 				03F76EC62B21B5790072FE8E /* GroupedProductsView.swift in Sources */,
 				03F76EC82B21CD9D0072FE8E /* PurchaseLogView.swift in Sources */,
 				03CC81992B1CD353003CD327 /* ListPurchaseLogView.swift in Sources */,
+				030915512C0F6E0D009767FA /* Container.xcdatamodeld in Sources */,
+				0309155B2C0F79F7009767FA /* OwnerController.swift in Sources */,
+				03587D7B2C0E1057000C0B04 /* ListOwnerView.swift in Sources */,
 				03CC81952B1CD0D2003CD327 /* DataController.swift in Sources */,
 				03598D692B1638F000739FEF /* ScannerView.swift in Sources */,
 				03CC819C2B1CD4B4003CD327 /* AddPurchaseLogView.swift in Sources */,
-				03587D6F2C0C4F3D000C0B04 /* ButtonListView.swift in Sources */,
-				03587D762C0CBAF6000C0B04 /* Container.xcdatamodeld in Sources */,
+				03587D6F2C0C4F3D000C0B04 /* HomeView.swift in Sources */,
+				0309155D2C0F7A0A009767FA /* PurchaseLogController.swift in Sources */,
 				037C8CBA2B122C7C005F3DF6 /* ScannerApp.swift in Sources */,
 				03598D672B16330000739FEF /* Product.swift in Sources */,
 			);
@@ -493,7 +513,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -524,7 +544,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -677,13 +697,14 @@
 /* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
-		03587D742C0CBAF6000C0B04 /* Container.xcdatamodeld */ = {
+		0309154F2C0F6E0D009767FA /* Container.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				03587D752C0CBAF6000C0B04 /* PurchaseLog.xcdatamodel */,
+				030915502C0F6E0D009767FA /* PurchaseLog.xcdatamodel */,
 			);
-			currentVersion = 03587D752C0CBAF6000C0B04 /* PurchaseLog.xcdatamodel */;
-			path = Container.xcdatamodeld;
+			currentVersion = 030915502C0F6E0D009767FA /* PurchaseLog.xcdatamodel */;
+			name = Container.xcdatamodeld;
+			path = /Users/wincs/Documents/projects/Scanner/Scanner/DataModel/Container.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};

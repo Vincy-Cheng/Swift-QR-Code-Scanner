@@ -12,7 +12,6 @@ struct ContentView: View {
     @State var isPresentingScannerView = false
     
     var body: some View {
-        
         HomeView()
 //                NavigationView{
 //                    VStack(spacing: 20){

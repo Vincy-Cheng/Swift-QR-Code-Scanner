@@ -9,6 +9,7 @@ import SwiftUI
 
 struct AddPurchaseLogView: View {
     @Environment (\.managedObjectContext) var managedObjectContext
+    @StateObject private var purchaseLogController = PurchaseLogController()
     
     @Binding var parsedProducts: [Product]
     @Binding var isPresentingScannerView:Bool
@@ -19,7 +20,7 @@ struct AddPurchaseLogView: View {
         Button("Complete"){
             // Add purchase log only if the length of the product list > 0 and able to encode the product list
             if parsedProducts.count > 0 , let content = stringifyObject(products: parsedProducts){
-                PurchaseLogController().addLog(content:content  , context: managedObjectContext)
+                purchaseLogController.addLog(content:content  , context: managedObjectContext)
                 isPresentingScannerView = false
                 print(content)
                 

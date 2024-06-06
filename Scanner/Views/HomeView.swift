@@ -9,51 +9,67 @@ import SwiftUI
 
 struct HomeView: View {
     @State private var navigateToPurchaseLog = false
-    @State private var navigateToManageUser = false
-    
+    @State private var navigateToManageOwner = false
+   
     
     var body: some View {
         NavigationStack {
-            VStack {
-                // Your main content goes here
-                Text("Hello, World!")
-                    .padding()
-                    .hidden()
+            GeometryReader { geometry in
+                VStack(){
+                    ListItemView()
+                        .frame(
+                                        width: geometry.size.width,
+                                        height: geometry.size.height * 2/3,
+                                        alignment: .topLeading
+                                    )
+       
+                    CalculateView().padding(.bottom)
+                    
+                    
+                }
+                .navigationTitle("Products")
+                .navigationDestination(
+                    isPresented: $navigateToPurchaseLog) {
+                        ListPurchaseLogView()
+                    }.navigationDestination(
+                        isPresented: $navigateToManageOwner) {
+                            ListOwnerView()
+                        }
+                
+                        .toolbar {
+                            ToolbarItem(placement: .principal) {
+                                HStack {
+                                    Text("Custom Title")
+                                        .font(.headline)
+                                        .foregroundColor(.primary)
+                                }
+                            }
+                            ToolbarItem(placement: .navigationBarTrailing) {
+                                Menu {
+//                                    Button("Purchase Log", action: { navigateToPurchaseLog = true
+//                                    })
+                                    
+                                    Button("Manage Owner", action: { navigateToManageOwner = true
+                                    })
+                                    
+                                } label: {
+                                    // Icon for the Menu Button
+                                    Image(systemName: "list.bullet")
+                                        .resizable()
+                                        .frame(width: 24, height: 24)
+                                        .foregroundColor(.blue)
+                                }
+                            }
+                        }
+                
+                        .frame(
+                            width: geometry.size.width,
+                            height: geometry.size.height,
+                            alignment: .topLeading
+                        )
+                 
                 
             }
-            .navigationDestination(
-                isPresented: $navigateToPurchaseLog) {
-                    ListPurchaseLogView()
-                }.navigationDestination(
-                    isPresented: $navigateToManageUser) {
-                        ListOwnerView()
-                    }
-            
-                    .toolbar {
-                        ToolbarItem(placement: .principal) {
-                            HStack {
-                                Text("Custom Title")
-                                    .font(.headline)
-                                    .foregroundColor(.primary)
-                            }
-                        }
-                        ToolbarItem(placement: .navigationBarTrailing) {
-                            Menu {
-                                Button("Purchase Log", action: { navigateToPurchaseLog = true
-                                })
-                                
-                                Button("Manage User", action: { navigateToManageUser = true
-                                })
-                                
-                            } label: {
-                                // Icon for the Menu Button
-                                Image(systemName: "list.bullet")
-                                    .resizable()
-                                    .frame(width: 24, height: 24)
-                                    .foregroundColor(.blue)
-                            }
-                        }
-                    }
             
             
         }

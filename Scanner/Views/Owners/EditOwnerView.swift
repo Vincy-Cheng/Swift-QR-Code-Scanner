@@ -15,7 +15,7 @@ struct EditOwnerView: View {
     @State private var newName = ""
     
     var body: some View {
-        NavigationView {
+        NavigationStack {
             Form {
                 Section(header: Text("Owner ID: \(String(describing: owner.id))")) {
                     TextField("New Name", text: $newName)

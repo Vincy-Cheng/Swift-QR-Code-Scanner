@@ -93,7 +93,6 @@ struct ListOwnerView: View {
     private func fetchOwners(context: NSManagedObjectContext) {
         let context = ownerController.container.viewContext
         owners = ownerController.findAllOwners(context: context)
-        print(owners)
     }
     
     private func deleteOwners(_ owner: Owner) {

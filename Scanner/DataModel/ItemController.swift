@@ -35,14 +35,13 @@ class ItemController: DataController{
         item.imageURL = data.imageURL
         item.category = data.category
         item.owner = data.owner
-        
         save(context: context)
     }
     func findAllItems(context: NSManagedObjectContext) -> [Item]{
         let request: NSFetchRequest<Item> = Item.fetchRequest()
         let sortDescriptor = NSSortDescriptor(key: "name", ascending: true)
         request.sortDescriptors = [sortDescriptor]
-        request.propertiesToGroupBy = ["owner"]
+//        request.propertiesToGroupBy = ["owner"]
         
         do {
             let result = try context.fetch(request)

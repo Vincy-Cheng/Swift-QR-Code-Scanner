@@ -39,15 +39,14 @@ class OwnerController: DataController{
         }
     }
     
-    func updateOwnerName(owner: Owner, newName: String) {
+    func updateOwnerName(context: NSManagedObjectContext,owner: Owner, newName: String) {
         owner.name = newName
         
         // Save changes to Core Data
-        let context = container.viewContext
         save(context: context)
     }
     
-    func deleteOwner(_ owner: Owner, context: NSManagedObjectContext) {
+    func deleteOwner(context: NSManagedObjectContext,_ owner: Owner) {
         context.delete(owner)
         save(context: context)
     }

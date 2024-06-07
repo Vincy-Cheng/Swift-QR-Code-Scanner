@@ -10,7 +10,7 @@ import CoreData
 
 struct ListOwnerView: View {
     //    @FetchRequest(sortDescriptors: [NSSortDescriptor(key: "id", ascending: true)]) var owners: FetchedResults<Owner>
-    
+    @Environment (\.managedObjectContext) var managedObjectContext
     @StateObject private var ownerController = OwnerController()
     
     @State private var owners: [Owner] = [];
@@ -30,10 +30,9 @@ struct ListOwnerView: View {
                         .padding(.leading)
                     
                     Button(action: {
-                        let context = ownerController.container.viewContext
                         if !inputText.isEmpty {
-                            if ownerController.addOwner(name: inputText.trimmingCharacters(in: .whitespacesAndNewlines), context: context) {
-                                fetchOwners(context: context) // Fetch owners if adding owner was successful
+                            if ownerController.addOwner(name: inputText.trimmingCharacters(in: .whitespacesAndNewlines), context: managedObjectContext) {
+                                fetchOwners(context: managedObjectContext) // Fetch owners if adding owner was successful
                                 inputText = "" // Clear the text field
                             } else {
                                 isShowingAlert = true // Show alert if name is already in use
@@ -76,7 +75,7 @@ struct ListOwnerView: View {
             }
       
             .onAppear {
-                fetchOwners(context: ownerController.container.viewContext)
+                fetchOwners(context: managedObjectContext)
             }
             .alert(isPresented: $isShowingAlert) {
                 Alert(title: Text("Name Already in Use"), message: Text("Please enter a unique name."), dismissButton: .default(Text("OK")))
@@ -96,9 +95,8 @@ struct ListOwnerView: View {
     }
     
     private func deleteOwners(_ owner: Owner) {
-        let context = ownerController.container.viewContext
-        ownerController.deleteOwner(owner, context: context)
-        fetchOwners(context: context)
+        ownerController.deleteOwner(context: managedObjectContext,owner)
+        fetchOwners(context: managedObjectContext)
         
         isShowDeleteConfirmation = false
     }

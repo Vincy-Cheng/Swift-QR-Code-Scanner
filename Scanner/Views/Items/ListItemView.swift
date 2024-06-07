@@ -9,10 +9,11 @@ import SwiftUI
 import CoreData
 
 struct ListItemView: View {
+    @Environment (\.managedObjectContext) var managedObjectContext
     @StateObject private var itemController = ItemController()
     @State private var isSheetPresented = false
     
-    @State private var items: [Item] = [];
+    @State private var items: [Item] = []
     
     // Define the grid layout
     let gridLayout = [
@@ -55,14 +56,14 @@ struct ListItemView: View {
                     }
                 }
                 .padding(.horizontal,10)
+            }.onAppear{
+                fetchItem()
             }
         }
     }
     
-    private func fetchItem(context: NSManagedObjectContext) {
-        let context = itemController
-            .container.viewContext
-        items = itemController.findAllItems(context: context)
+    private func fetchItem() {
+        items = itemController.findAllItems(context: managedObjectContext)
         print(items)
     }
 }

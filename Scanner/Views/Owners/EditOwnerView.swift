@@ -9,6 +9,7 @@ import SwiftUI
 import CoreData
 
 struct EditOwnerView: View {
+    @Environment (\.managedObjectContext) var managedObjectContext
     @Environment(\.presentationMode) var presentationMode
     @ObservedObject var owner: Owner
     @Binding var isPresented: Bool // Binding to dismiss the view
@@ -37,7 +38,7 @@ struct EditOwnerView: View {
     
     private func updateOwnerName() {
         let ownerController = OwnerController()
-        ownerController.updateOwnerName(owner: owner, newName: newName)
+        ownerController.updateOwnerName(context: managedObjectContext ,owner: owner, newName: newName)
         isPresented = false // Dismiss the view
     }
 }

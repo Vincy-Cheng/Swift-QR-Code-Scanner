@@ -10,7 +10,7 @@ import SwiftUI
 struct HomeView: View {
     @State private var navigateToPurchaseLog = false
     @State private var navigateToManageOwner = false
-   
+    
     
     var body: some View {
         NavigationStack {
@@ -18,11 +18,11 @@ struct HomeView: View {
                 VStack(){
                     ListItemView()
                         .frame(
-                                        width: geometry.size.width,
-                                        height: geometry.size.height * 2/3,
-                                        alignment: .topLeading
-                                    )
-       
+                            width: geometry.size.width,
+                            height: geometry.size.height * 2/3,
+                            alignment: .topLeading
+                        )
+                    
                     CalculateView().padding(.bottom)
                     
                     
@@ -46,8 +46,8 @@ struct HomeView: View {
                             }
                             ToolbarItem(placement: .navigationBarTrailing) {
                                 Menu {
-//                                    Button("Purchase Log", action: { navigateToPurchaseLog = true
-//                                    })
+                                    //                                    Button("Purchase Log", action: { navigateToPurchaseLog = true
+                                    //                                    })
                                     
                                     Button("Manage Owner", action: { navigateToManageOwner = true
                                     })
@@ -67,7 +67,7 @@ struct HomeView: View {
                             height: geometry.size.height,
                             alignment: .topLeading
                         )
-                 
+                
                 
             }
             

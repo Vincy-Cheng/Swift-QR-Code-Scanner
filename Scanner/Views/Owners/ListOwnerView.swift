@@ -31,7 +31,7 @@ struct ListOwnerView: View {
                     
                     Button(action: {
                         if !inputText.isEmpty {
-                            if ownerController.addOwner(name: inputText.trimmingCharacters(in: .whitespacesAndNewlines), context: managedObjectContext) {
+                            if ownerController.addOwner(context: managedObjectContext,name: inputText.trimmingCharacters(in: .whitespacesAndNewlines)) {
                                 fetchOwners(context: managedObjectContext) // Fetch owners if adding owner was successful
                                 inputText = "" // Clear the text field
                             } else {
@@ -90,8 +90,7 @@ struct ListOwnerView: View {
         }
     }
     private func fetchOwners(context: NSManagedObjectContext) {
-        let context = ownerController.container.viewContext
-        owners = ownerController.findAllOwners(context: context)
+        owners = ownerController.findAllOwners(context: managedObjectContext)
     }
     
     private func deleteOwners(_ owner: Owner) {

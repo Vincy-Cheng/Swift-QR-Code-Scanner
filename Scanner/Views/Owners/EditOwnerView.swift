@@ -32,8 +32,7 @@ struct EditOwnerView: View {
                     presentationMode.wrappedValue.dismiss()
                 }
             )
-        }
-        
+        }  
     }
     
     private func updateOwnerName() {

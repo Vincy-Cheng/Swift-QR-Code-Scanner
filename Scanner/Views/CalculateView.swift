@@ -8,15 +8,15 @@
 import SwiftUI
 
 struct CalculateView: View {
+    @Binding var selectedItems: [Item]
+    
     var body: some View {
         VStack{
-            Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+            Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/).foregroundColor(.black)
             Spacer()
-        }.background(Color.yellow)
+        }
+        
         
     }
 }
 
-#Preview {
-    CalculateView()
-}

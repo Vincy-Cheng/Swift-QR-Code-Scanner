@@ -33,7 +33,7 @@ struct CreateItemView: View {
     @FocusState private var isFocused: Bool
     
     let options = ["available", "archive"]
-
+    
     
     let formatter: NumberFormatter = {
         let formatter = NumberFormatter()
@@ -90,7 +90,7 @@ struct CreateItemView: View {
                 }
                 
                 let owners = OwnerController().findAllOwners(context: managedObjectContext)
-    
+                
                 Section(header: Text("Owner")) {
                     Picker("Select the owner", selection: Binding(
                         get: { owner ?? owners.first }, // Unwrap the optional selectedOwner
@@ -187,11 +187,9 @@ struct CreateItemView: View {
                 itemController.addItem(context: context, data: data)
             }
         }else{
-            
             print("calling function")
             let data = ItemData(name: name, price: Double(price), quantity: quantity, status: ItemStatus(rawValue: status) ?? ItemStatus.available, imageURL: "", category: category!, owner: owner!)
             itemController.addItem(context: context, data: data)
-            
         }
     }
     
@@ -200,21 +198,34 @@ struct CreateItemView: View {
 
 
 func saveImageToDocumentsDirectory(image: UIImage) -> String? {
-    guard let data = image.jpegData(compressionQuality: 1.0) else {
+    let filename = UUID().uuidString + ".jpg"
+    
+    guard let imageData = image.jpegData(compressionQuality: 1.0) else {
+        print("Failed to convert UIImage to Data")
         return nil
     }
     
-    let filename = UUID().uuidString + ".jpg"
-    let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
-    let documentsDirectory = paths[0]
+    // Get the URL for the Documents directory
+    guard let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else {
+        print("Failed to get Documents directory")
+        return nil
+    }
+    
+    // Append the file name to the Documents directory URL
     let fileURL = documentsDirectory.appendingPathComponent(filename)
     
     do {
-        try data.write(to: fileURL)
-        return fileURL.path
+        // Write the image data to the file URL
+        try imageData.write(to: fileURL)
+        print("Photo saved to: \(fileURL)")
+        // Determine the relative path
+        let relativePath = fileURL.path.replacingOccurrences(of: FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!.path, with: "")
+        
+        // Return the relative path
+        return relativePath
     } catch {
-        print("Error saving image: \(error)")
-        return nil
+        print("Error saving photo: \(error.localizedDescription)")
+        return ""
     }
 }
 

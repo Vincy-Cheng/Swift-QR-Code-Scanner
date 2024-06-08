@@ -10,10 +10,10 @@ import CoreData
 
 class OwnerController: DataController{
     
-    func addOwner(name:String,context: NSManagedObjectContext) -> Bool{
+    func addOwner(context: NSManagedObjectContext,name:String) -> Bool{
         // Check if the name is already in use
-        let existingOwners = findAllOwners(context: context)
-        if existingOwners.contains(where: { $0.name == name }) {
+        let existingOwner = findAllOwners(context: context)
+        if existingOwner.contains(where: { $0.name == name }) {
             return false // Name is already in use
         }
         

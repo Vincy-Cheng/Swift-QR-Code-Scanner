@@ -41,7 +41,9 @@ class ItemController: DataController{
         let request: NSFetchRequest<Item> = Item.fetchRequest()
         let sortDescriptor = NSSortDescriptor(key: "name", ascending: true)
         request.sortDescriptors = [sortDescriptor]
-//        request.propertiesToGroupBy = ["owner"]
+        
+        // Set the relationships to be fetched with the main entity
+        request.relationshipKeyPathsForPrefetching = ["owner", "category"]
         
         do {
             let result = try context.fetch(request)
@@ -51,7 +53,7 @@ class ItemController: DataController{
             return []
         }
     }
-
+    
     //    func updateOwnerName(owner: Owner, newName: String) {
     //        owner.name = newName
     //

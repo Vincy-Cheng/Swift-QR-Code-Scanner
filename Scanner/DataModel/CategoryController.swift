@@ -21,6 +21,7 @@ class CategoryController: DataController{
         
         category.id = UUID()  // Assign a unique ID
         category.name = name
+        category.updatedAt = Date()
         save(context: context)
         return true
     }
@@ -42,6 +43,7 @@ class CategoryController: DataController{
     
     func updateCategoryName(context: NSManagedObjectContext,category: Category, newName: String) {
         category.name = newName
+        category.updatedAt = Date()
         
         // Save changes to Core Data
         save(context: context)

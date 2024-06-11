@@ -25,7 +25,12 @@ struct ItemData {
 
 class ItemController: DataController{
     
-    func addItem(context: NSManagedObjectContext,data: ItemData) {
+    func addItem(context: NSManagedObjectContext,data: ItemData) -> Bool {
+        let existingItem = findAllItems(context: context,filterString: nil,ownerName: nil,categoryName: nil)
+        if existingItem.contains(where: { $0.name == data.name }) {
+            return false // Name is already in use
+        }
+        
         let item = Item(context: context)
         item.id = UUID()  // Assign a unique ID
         item.name = data.name
@@ -35,12 +40,33 @@ class ItemController: DataController{
         item.imageURL = data.imageURL
         item.category = data.category
         item.owner = data.owner
+        item.updatedAt = Date()
         save(context: context)
+        return true
     }
-    func findAllItems(context: NSManagedObjectContext) -> [Item]{
+    func findAllItems(context: NSManagedObjectContext,filterString:String?,ownerName:String?,categoryName:String?) -> [Item]{
         let request: NSFetchRequest<Item> = Item.fetchRequest()
         let sortDescriptor = NSSortDescriptor(key: "name", ascending: true)
         request.sortDescriptors = [sortDescriptor]
+        
+        var predicates: [NSPredicate] = []
+        
+        if let filterString = filterString, !filterString.isEmpty {
+            predicates.append(NSPredicate(format: "name CONTAINS[cd] %@", filterString))
+        }
+        
+        if let ownerName = ownerName, !ownerName.isEmpty {
+            predicates.append(NSPredicate(format: "owner.name == %@", ownerName))
+        }
+        
+        if let categoryName = categoryName, !categoryName.isEmpty {
+            predicates.append(NSPredicate(format: "categoryName.name == %@", categoryName))
+        }
+        
+        if !predicates.isEmpty {
+            request.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: predicates)
+        }
+        
         
         // Set the relationships to be fetched with the main entity
         request.relationshipKeyPathsForPrefetching = ["owner", "category"]
@@ -54,16 +80,39 @@ class ItemController: DataController{
         }
     }
     
-    //    func updateOwnerName(owner: Owner, newName: String) {
-    //        owner.name = newName
-    //
-    //        // Save changes to Core Data
-    //        let context = container.viewContext
-    //        save(context: context)
-    //    }
-    //
-    //    func deleteOwner(_ owner: Owner, context: NSManagedObjectContext) {
-    //        context.delete(owner)
-    //        save(context: context)
-    //    }
+    func findItemById(context: NSManagedObjectContext,withId id: UUID) -> Item? {
+        let fetchRequest: NSFetchRequest<Item> = Item.fetchRequest()
+        fetchRequest.predicate = NSPredicate(format: "id == %@", id as CVarArg)
+        
+        do {
+            let item = try context.fetch(fetchRequest)
+            return item.first
+        } catch {
+            print("Failed to fetch item: \(error)")
+            return nil
+        }
+    }
+    
+    func updateItem(context: NSManagedObjectContext,item:Item,itemData: ItemData) {
+        item.category = itemData.category
+        item.imageURL = itemData.imageURL
+        item.name = itemData.name
+        item.owner = itemData.owner
+        item.price = itemData.price
+        item.quantity = Int32(itemData.quantity)
+        item.status = item.status
+        item.updatedAt = Date()
+        save(context: context)
+    }
+    
+    func updateTransactionItemQuantity(context: NSManagedObjectContext, item: Item, quantity: Int ) {
+        item.quantity = item.quantity - Int32(quantity)
+        
+        save(context: context)
+    }
+    
+    func deleteItem(context: NSManagedObjectContext,item: Item) {
+        context.delete(item)
+        save(context: context)
+    }
 }

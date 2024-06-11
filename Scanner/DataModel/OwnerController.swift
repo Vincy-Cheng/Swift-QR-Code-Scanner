@@ -21,6 +21,7 @@ class OwnerController: DataController{
         let owner = Owner(context: context)
         owner.id = UUID()  // Assign a unique ID
         owner.name = name
+        owner.updatedAt = Date()
         save(context: context)
         
         return true // Owner added successfully
@@ -41,6 +42,7 @@ class OwnerController: DataController{
     
     func updateOwnerName(context: NSManagedObjectContext,owner: Owner, newName: String) {
         owner.name = newName
+        owner.updatedAt = Date()
         
         // Save changes to Core Data
         save(context: context)

@@ -14,6 +14,9 @@ struct CreateItemView: View {
     
     @StateObject private var itemController = ItemController()
     
+    @State private var categories: [Category] = []
+    @State private var owners: [Owner] = []
+    
     @Binding var isPresented: Bool
     @State private var isPresentCategoryCreate = false
     @State private var name = ""
@@ -59,7 +62,6 @@ struct CreateItemView: View {
                     ownerPickerSection
                     
                     Section(header: Text("Image")) {
-                        
                         if let selectedImage = selectedImage {
                             Image(uiImage: selectedImage)
                                 .resizable()
@@ -104,27 +106,24 @@ struct CreateItemView: View {
                 .onAppear{
                     checkPhotoLibraryPermission()
                     // Set default owner if owners is not empty
-                    let owners = OwnerController().findAllOwners(context: managedObjectContext)
-                    if !owners.isEmpty {
+                    owners = OwnerController().findAllOwners(context: managedObjectContext)
+                    if owners.isEmpty {
                         owner = owners.first
                     }
                     // Set default category if categories is not empty
-                    let categories = CategoryController().findAllCategories(context: managedObjectContext)
-                    if !categories.isEmpty {
+                    categories = CategoryController().findAllCategories(context: managedObjectContext)
+                    if categories.isEmpty {
                         category = categories.first
                     }
                 }
                 CreateItemImageView(selectedImage: $selectedImage, selectedItem: $selectedItem, isCameraPresented: $isCameraPresented)
                 Spacer()
             }
-            
-            
         }
     }
     
+    
     private var categoryPickerSection: some View {
-        let categories = CategoryController().findAllCategories(context: managedObjectContext)
-        
         return Section(header: HStack {
             Text("Category")
             Spacer()
@@ -132,7 +131,9 @@ struct CreateItemView: View {
                 isPresentCategoryCreate = true
             }
             .font(.caption)
-            .sheet(isPresented: $isPresentCategoryCreate) {
+            .sheet(isPresented: $isPresentCategoryCreate,onDismiss: {
+                categories = CategoryController().findAllCategories(context: managedObjectContext)
+            }) {
                 CreateCategoryView()
             }
         }) {
@@ -246,15 +247,12 @@ struct CreateItemImageView: View {
                 Text("Take Photo").foregroundStyle(.blue)
             }
             .padding()
-            //                    .background(Color.blue)
             .foregroundColor(.white)
             .cornerRadius(10)
             .sheet(isPresented: $isCameraPresented) {
                 CameraView(selectedImage: $selectedImage, isPresented: $isCameraPresented, isCaptured: $isImageChange)
             }
-            
-            
-        }.onChange(of: selectedImage){
+        }.onChange(of: selectedItem){
             _ in
             Task{
                 if let selectedItem,

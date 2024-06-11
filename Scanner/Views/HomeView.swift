@@ -27,8 +27,9 @@ struct HomeView: View {
                             width: geometry.size.width,
                             height: geometry.size.height * 2/3,
                             alignment: .topLeading
-                        ).shadow(color: Color.black.opacity(0.3), radius: 10, x: 0, y: 5)
+                        )
                         .clipShape(RoundedCornersShape(corners: [.bottomLeft, .bottomRight], radius: 25))
+//                        .shadow(color: Color.black.opacity(0.3), radius: 10, x: 0, y: 5)
                     
                     CalculateView(selectedItems: $selectedItems)
                         .frame(
@@ -69,7 +70,7 @@ struct HomeView: View {
                                 Text("Manage Item")
                             }
                             NavigationLink {
-                                ListTransactionView()
+                                GroupedTransactionView()
                                 
                             } label: {
                                 Text("Records")

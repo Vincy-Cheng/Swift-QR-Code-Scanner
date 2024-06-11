@@ -101,7 +101,7 @@ struct GridItemView: View {
                                 
                                 VStack {
                                     Text(item.name!)
-                                        .foregroundColor(.white)
+                                        .foregroundColor(uiImage == nil ? Color(uiColor: UIColor(red: 120/255, green: 108/255, blue: 255/255, alpha: 1)): Color.white)
                                         .font(.system(size: 18)) // Adjust font size as needed
                                         .fontWeight(.bold)
                                         .padding(.top,20)
@@ -109,7 +109,7 @@ struct GridItemView: View {
                                     Spacer()
                                     
                                     Text("$\(Int(item.price))")
-                                        .foregroundColor(.white)
+                                        .foregroundColor(uiImage == nil ? Color(uiColor: UIColor(red: 120/255, green: 108/255, blue: 255/255, alpha: 1)): Color.white)
                                         .font(.system(size: 18)) // Adjust font size as needed
                                         .fontWeight(.bold)
                                         .frame(maxWidth: geometry.size.width / 2.5)
@@ -193,6 +193,12 @@ struct GridItemView: View {
                     fetchItem()
                 }
                 .onChange(of: needRefresh) { _ in
+                    fetchItem()
+                }
+                .onChange(of: ownerName) { _ in
+                    fetchItem()
+                }
+                .onChange(of: categoryName) { _ in
                     fetchItem()
                 }
                 

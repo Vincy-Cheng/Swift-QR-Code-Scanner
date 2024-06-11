@@ -60,7 +60,7 @@ class ItemController: DataController{
         }
         
         if let categoryName = categoryName, !categoryName.isEmpty {
-            predicates.append(NSPredicate(format: "categoryName.name == %@", categoryName))
+            predicates.append(NSPredicate(format: "category.name == %@", categoryName))
         }
         
         if !predicates.isEmpty {

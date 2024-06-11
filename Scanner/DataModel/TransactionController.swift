@@ -11,11 +11,12 @@ import CoreData
 
 class TransactionController: DataController{
     
-    func addTransaction(context: NSManagedObjectContext,payment:String,items:[Item]) -> Bool {
+    func addTransaction(context: NSManagedObjectContext,payment:String,paid: Double, items:[Item]) -> Bool {
         let transaction = Transaction(context: context)
         
         transaction.id = UUID()
         transaction.payment = payment
+        transaction.paid = paid
         transaction.createdAt = Date()
         
         // Create a dictionary to count the quantity of each item
@@ -43,6 +44,8 @@ class TransactionController: DataController{
         let sortDescriptor = NSSortDescriptor(key: "createdAt", ascending: true)
         
         request.sortDescriptors = [sortDescriptor]
+        
+        request.relationshipKeyPathsForPrefetching = ["transactionItems"]
         
         do {
             let result = try context.fetch(request)

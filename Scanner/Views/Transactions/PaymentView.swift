@@ -34,39 +34,33 @@ struct PaymentView: View {
     @State private var isConfirm = false
     
     var body: some View {
-        
         VStack{
             HStack{
                 paymentMethod
                 Spacer()
                 countingView
-            }.padding(.top,20)
-                .onAppear{
-                    selectedMethod = options[0]
-                }
-            
-            HStack{
-                Spacer()
-                Button(action: {
-                    isConfirm = true
-                }) {
+            }
+            .toolbar{
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button(action: {
+                        isConfirm = true
+                    }) {
+                        Label("Save to record", systemImage: "square.and.arrow.down")
+                            .foregroundColor(inputValue - sumUp(groupedItems: groupItems(selectedItems: selectedItems)) < 0 ? Color.gray :Color.blue)
+                        
+                    }.disabled(inputValue - sumUp(groupedItems: groupItems(selectedItems: selectedItems)) < 0)
                     
-                    Text("Save to record").font(.title).foregroundStyle(inputValue - sumUp(groupedItems: groupItems(selectedItems: selectedItems)) < 0 ? Color.gray :Color(uiColor: UIColor(red: 120/255, green: 108/255, blue: 255/255, alpha: 1)))
-                    Image(systemName: "arrowshape.right.fill")
-                        .resizable()
-                        .frame(width: 24, height: 24)
-                        .foregroundColor(inputValue - sumUp(groupedItems: groupItems(selectedItems: selectedItems)) < 0 ? Color.gray :Color(uiColor: UIColor(red: 120/255, green: 108/255, blue: 255/255, alpha: 1)))
-                }.disabled(inputValue - sumUp(groupedItems: groupItems(selectedItems: selectedItems)) < 0)
-                
-            }.padding()
-            
-            
+                }
+            }
+            .onAppear{
+                selectedMethod = options[0]
+            }
         }.alert(isPresented: $isConfirm){
             Alert(
                 title: Text("Warning"),
                 message: Text("Confirm the items?"),
                 primaryButton: .destructive(Text("Confirm")) {
-                    if TransactionController().addTransaction(context: managedObjectContext, payment: selectedMethod!.name, items: selectedItems) {
+                    if TransactionController().addTransaction(context: managedObjectContext, payment: selectedMethod!.name,paid: Double(inputValue), items: selectedItems) {
                         for item in selectedItems{
                             ItemController().updateTransactionItemQuantity(context: managedObjectContext, item: item, quantity: 1)
                         }

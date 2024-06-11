@@ -8,11 +8,7 @@
 import SwiftUI
 import CoreData
 
-func formattedDate(from date: Date) -> String {
-    let dateFormatter = DateFormatter()
-    dateFormatter.dateFormat = "MMM d, yyyy - HH:mm:ss"
-    return dateFormatter.string(from: date)
-}
+
 
 struct ListPurchaseLogView:View {
     

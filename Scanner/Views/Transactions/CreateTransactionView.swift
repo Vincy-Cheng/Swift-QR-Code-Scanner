@@ -13,31 +13,25 @@ struct CreateTransactionView: View {
     var body: some View {
         NavigationStack {
             GeometryReader { geometry in
-                ScrollView {
+                
                     VStack(alignment: .leading, spacing: 0) {
                         // Top 2/3 colored and scrollable section with shadow
-                        ZStack {
-                            // Background and shadow
-                            RoundedCornersShape(corners: [.bottomLeft, .bottomRight], radius: 25)
-                                .fill(Color(uiColor: UIColor(red: 173/255, green: 194/255, blue: 223/255, alpha: 1)))
-                                .frame(width: geometry.size.width, height: geometry.size.height * 2/3)
-                                .shadow(color: Color.black.opacity(0.3), radius: 10, x: 0, y: 5)
-                            
-                            // Scrollable content
-                            
-                            VStack {
+                        ScrollView {               
+                            VStack(alignment: .leading) {
                                 ItemsListView(selectedItems: $selectedItems,color: Color.white)
                                     .padding(.horizontal)
                             }
-                            .frame(width: geometry.size.width, height: geometry.size.height * 2/3, alignment: .topLeading)
                             .clipShape(RoundedCornersShape(corners: [.bottomLeft, .bottomRight], radius: 25))
-                            
-                            
+                            .shadow(color: Color.black.opacity(0.3), radius: 10, x: 0, y: 5)
                         }
-                        
+                        .background(Color(uiColor: UIColor(red: 173/255, green: 194/255, blue: 223/255, alpha: 1)))
+                        .frame(width: geometry.size.width, height: geometry.size.height * 3/5, alignment: .topLeading)
+                            .clipShape(RoundedCornersShape(corners: [.bottomLeft, .bottomRight], radius: 25))
+                            .shadow(color: Color.black.opacity(0.3), radius: 10, x: 0, y: 5)
+                            
                         // Bottom 1/3 section
-                        PaymentView(selectedItems: $selectedItems)
-                    }
+                        PaymentView(selectedItems: $selectedItems).padding(.vertical,10)
+                    
                 }
             }
             .onTapGesture {

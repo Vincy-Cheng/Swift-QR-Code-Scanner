@@ -29,6 +29,8 @@ struct ItemView: View {
     @State private var selectedImage: UIImage? = nil
     @State private var selectedItem: PhotosPickerItem? = nil
     
+    @State private var categories: [Category] = []
+    
     @FocusState private var isFocused: Bool
     
     private let options = ["available", "archive"];
@@ -123,19 +125,20 @@ struct ItemView: View {
         category = item.category
         owner = item.owner
         selectedImage = loadImageFromRelativePath(relativePath: item.imageURL ?? "")
+        categories = CategoryController().findAllCategories(context: managedObjectContext)
     }
     
     private var categoryPickerSection: some View {
         Section(header: categoryHeader) {
             Picker("Select the category", selection: $category) {
-                ForEach(fetchCategories(), id: \.self) {
+                ForEach(categories, id: \.self) {
                     Text($0.name ?? "").tag($0 as Category?)
                 }
             }
             .pickerStyle(.menu)
         }
         .onAppear {
-            category = fetchCategories().first
+            category = categories.first
         }
     }
     
@@ -147,7 +150,9 @@ struct ItemView: View {
                 isPresentCategoryCreate = true
             }
             .font(.caption)
-            .sheet(isPresented: $isPresentCategoryCreate) {
+            .sheet(isPresented: $isPresentCategoryCreate,onDismiss: {
+                categories = CategoryController().findAllCategories(context: managedObjectContext)
+            }) {
                 CreateCategoryView()
             }
         }
@@ -180,10 +185,6 @@ struct ItemView: View {
                 presentationMode.wrappedValue.dismiss()
             }
         }
-    }
-    
-    private func fetchCategories() -> [Category] {
-        CategoryController().findAllCategories(context: managedObjectContext)
     }
     
     private func fetchOwners() -> [Owner] {
@@ -266,7 +267,7 @@ struct EditItemImageView: View {
             }
             
             
-        }.onChange(of: selectedImage){
+        }.onChange(of: selectedItem){
             _ in
             Task{
                 if let selectedItem,

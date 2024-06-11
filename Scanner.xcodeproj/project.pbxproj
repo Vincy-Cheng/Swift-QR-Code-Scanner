@@ -43,6 +43,7 @@
 		03DEDA1F2C15D4D800FB91C4 /* TransactionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03DEDA1E2C15D4D800FB91C4 /* TransactionController.swift */; };
 		03DEDA212C15ECB600FB91C4 /* ListTransactionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03DEDA202C15ECB600FB91C4 /* ListTransactionView.swift */; };
 		03DEDA232C16CE7200FB91C4 /* TransactionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03DEDA222C16CE7200FB91C4 /* TransactionView.swift */; };
+		03DEDA252C189B8300FB91C4 /* GroupedTransactionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03DEDA242C189B8300FB91C4 /* GroupedTransactionView.swift */; };
 		03F76EC62B21B5790072FE8E /* GroupedProductsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03F76EC52B21B5790072FE8E /* GroupedProductsView.swift */; };
 		03F76EC82B21CD9D0072FE8E /* PurchaseLogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03F76EC72B21CD9D0072FE8E /* PurchaseLogView.swift */; };
 /* End PBXBuildFile section */
@@ -103,6 +104,7 @@
 		03DEDA1E2C15D4D800FB91C4 /* TransactionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionController.swift; sourceTree = "<group>"; };
 		03DEDA202C15ECB600FB91C4 /* ListTransactionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListTransactionView.swift; sourceTree = "<group>"; };
 		03DEDA222C16CE7200FB91C4 /* TransactionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionView.swift; sourceTree = "<group>"; };
+		03DEDA242C189B8300FB91C4 /* GroupedTransactionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupedTransactionView.swift; sourceTree = "<group>"; };
 		03F76EC52B21B5790072FE8E /* GroupedProductsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupedProductsView.swift; sourceTree = "<group>"; };
 		03F76EC72B21CD9D0072FE8E /* PurchaseLogView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseLogView.swift; sourceTree = "<group>"; };
 		03F76EC92B2217A60072FE8E /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
@@ -265,6 +267,7 @@
 				03DEDA1C2C14C56900FB91C4 /* PaymentView.swift */,
 				03DEDA222C16CE7200FB91C4 /* TransactionView.swift */,
 				03DEDA202C15ECB600FB91C4 /* ListTransactionView.swift */,
+				03DEDA242C189B8300FB91C4 /* GroupedTransactionView.swift */,
 			);
 			path = Transactions;
 			sourceTree = "<group>";
@@ -421,6 +424,7 @@
 				03DEDA122C13668600FB91C4 /* ListCategoryView.swift in Sources */,
 				03DEDA0F2C13579800FB91C4 /* CamerPreviewView.swift in Sources */,
 				030915512C0F6E0D009767FA /* Container.xcdatamodeld in Sources */,
+				03DEDA252C189B8300FB91C4 /* GroupedTransactionView.swift in Sources */,
 				03DEDA0D2C13570700FB91C4 /* CameraView.swift in Sources */,
 				0309155B2C0F79F7009767FA /* OwnerController.swift in Sources */,
 				03587D7B2C0E1057000C0B04 /* ListOwnerView.swift in Sources */,

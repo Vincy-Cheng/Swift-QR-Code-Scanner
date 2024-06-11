@@ -24,8 +24,8 @@ struct PaymentView: View {
     @Environment(\.presentationMode) var presentationMode
     @Binding var selectedItems: [Item]
     @State var options: [PaymentMethod] = [
-        PaymentMethod(name: "Payme", color: Color.red),
         PaymentMethod(name: "Cash", color: Color.yellow),
+        PaymentMethod(name: "Payme", color: Color.red),
         PaymentMethod(name: "支付寶", color: Color.blue),
         PaymentMethod(name: "FPS", color: Color.green)
     ]

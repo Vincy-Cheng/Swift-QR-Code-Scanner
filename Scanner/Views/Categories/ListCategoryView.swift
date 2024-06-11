@@ -68,7 +68,7 @@ struct ListCategoryView: View {
                         }
                     }.onDelete(perform: { indexSet in
                         let selected = indexSet.map { categories[$0] }
-//                        deleteOwners(selected[0])
+                        deleteCategory(selected[0])
                     })
                 }
                 .listStyle(PlainListStyle())
@@ -81,7 +81,9 @@ struct ListCategoryView: View {
                 Alert(title: Text("Name Already in Use"), message: Text("Please enter a unique name."), dismissButton: .default(Text("OK")))
                 
             }
-            .sheet(item: $selectedCategory) {selectedCategory in
+            .sheet(item: $selectedCategory,onDismiss: {
+                fetchCategory(context: managedObjectContext)
+            }) {selectedCategory in
                 EditCategoryView(category:selectedCategory, isPresented: $isPresentingEditView)
                 
             }
@@ -93,7 +95,7 @@ struct ListCategoryView: View {
     }
     
     private func deleteCategory(_ category: Category) {
-//        categoryController.deleteOwner(context: managedObjectContext,owner)
+        categoryController.deleteCategory(context: managedObjectContext,category)
         fetchCategory(context: managedObjectContext)
         
         isShowDeleteConfirmation = false

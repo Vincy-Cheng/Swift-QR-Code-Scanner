@@ -10,6 +10,7 @@ import CoreData
 
 struct CreateCategoryView: View {
     @Environment(\.presentationMode) var presentationMode
+    @Environment(\.managedObjectContext) var managedObjectContext
     @StateObject private var categoryController = CategoryController()
     @State private var name = ""
     
@@ -25,8 +26,7 @@ struct CreateCategoryView: View {
                         presentationMode.wrappedValue.dismiss()
                     },
                     trailing: Button("Create") {
-                        let context = categoryController.container.viewContext
-                        categoryController.addCategory(context:context , name: name)
+                        categoryController.addCategory(context: managedObjectContext , name: name)
                         presentationMode.wrappedValue.dismiss()
                     }
                 )

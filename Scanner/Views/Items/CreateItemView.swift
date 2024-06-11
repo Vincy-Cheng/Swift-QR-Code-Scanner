@@ -4,229 +4,296 @@
 //
 //  Created by Wing Lam Cheng on 6/6/24.
 //
-
 import SwiftUI
 import PhotosUI
 import CoreData
 
 struct CreateItemView: View {
-    @Environment (\.managedObjectContext) var managedObjectContext
+    @Environment(\.managedObjectContext) var managedObjectContext
     @Environment(\.presentationMode) var presentationMode
     
     @StateObject private var itemController = ItemController()
     
-    @Binding var isPresented: Bool // Binding to dismiss the view
-    @State var isPresentCategoryCreate: Bool = false // Binding to dismiss the view
+    @Binding var isPresented: Bool
+    @State private var isPresentCategoryCreate = false
     @State private var name = ""
     @State private var price = 0
     @State private var quantity = 0
     @State private var status = "available"
-    
-    @State private var category: Category? = nil;
-    
-    @State private var owner: Owner? = nil;
-    
+    @State private var category: Category? = nil
+    @State private var owner: Owner? = nil
     @State private var selectedImage: UIImage? = nil
     @State private var selectedItem: PhotosPickerItem? = nil
     @State private var isCameraPresented = false
+    @State private var isAlert = false
+    @State private var alertContent = ""
     
     @FocusState private var isFocused: Bool
     
-    let options = ["available", "archive"]
-    
-    
-    let formatter: NumberFormatter = {
-        let formatter = NumberFormatter()
-        formatter.numberStyle = .decimal
-        return formatter
-    }()
+    private let options = ["available", "archive"]
     
     var body: some View {
-        NavigationStack{
-            Form {
-                Section(header: Text("Name")) {
-                    TextField("Enter the name", text: $name)
-                }
-                Section(header: Text("Price")) {
-                    TextField("Enter the price", value: $price, formatter: formatter).keyboardType(.numberPad)
-                }
-                Section(header: Text("Quantity")) {
-                    TextField("Enter the quantity", value: $quantity, formatter: formatter).keyboardType(.numberPad)
-                }
-                Section(header: Text("Status")) {
-                    Picker("Select the status", selection: $status) {
-                        ForEach(options, id: \.self) {
-                            Text($0)
-                        }
+        NavigationStack {
+            VStack{
+                Form {
+                    Section(header: Text("Name")) {
+                        TextField("Enter the name", text: $name)
                     }
-                    .pickerStyle(.menu)
-                }
-                
-                let categories = CategoryController().findAllCategories(context: managedObjectContext)
-                
-                Section(header: HStack{
-                    Text("Category")
-                    Button(action: {
-                        isPresentCategoryCreate = true
-                    }, label: {
-                        Text("Add category").font(.caption)
-                    }).sheet(isPresented: $isPresentCategoryCreate){
-                        CreateCategoryView()
+                    Section(header: Text("Price")) {
+                        TextField("Enter the price", value: $price, formatter: formatter())
+                            .keyboardType(.numberPad)
                     }
-                }) {
-                    Picker("Select the category", selection: Binding(
-                        get: { category ?? categories.first }, // Unwrap the optional selectedOwner
-                        set: { category = $0 }
-                    )) {
-                        ForEach(categories, id: \.self) {
-                            Text($0.name!)
-                        }
-                        
+                    Section(header: Text("Quantity")) {
+                        TextField("Enter the quantity", value: $quantity, formatter: formatter())
+                            .keyboardType(.numberPad)
                     }
-                    .pickerStyle(.menu)
-                }.onAppear {
-                    // Set the default selection once owners becomes available
-                    category = categories.first // Assuming owners is an array of Owner objects
-                }
-                
-                let owners = OwnerController().findAllOwners(context: managedObjectContext)
-                
-                Section(header: Text("Owner")) {
-                    Picker("Select the owner", selection: Binding(
-                        get: { owner ?? owners.first }, // Unwrap the optional selectedOwner
-                        set: { owner = $0 }
-                    )) {
-                        ForEach(owners, id: \.self) {
-                            Text($0.name!)
-                        }
-                    }
-                    .pickerStyle(.menu)
-                }.onAppear {
-                    // Set the default selection once owners becomes available
-                    owner = owners.first // Assuming owners is an array of Owner objects
-                }
-                
-                
-                PhotosPicker(
-                    selection: $selectedItem,
-                    matching: .images,
-                    photoLibrary: .shared()) {
-                        Text("Select Photo")
-                            .padding()
-                            .background(Color.blue)
-                            .foregroundColor(.white)
-                            .cornerRadius(10)
-                    }
-                    .onChange(of: selectedItem) { newItem in
-                        Task {
-                            if let data = try? await newItem?.loadTransferable(type: Data.self),
-                               let uiImage = UIImage(data: data) {
-                                selectedImage = uiImage
+                    Section(header: Text("Status")) {
+                        Picker("Select the status", selection: $status) {
+                            ForEach(options, id: \.self) {
+                                Text($0)
                             }
                         }
+                        .pickerStyle(.menu)
                     }
-                
-                Button(action: {
-                    isCameraPresented = true
-                }) {
-                    Text("Take Photo")
-                        .padding()
-                        .background(Color.blue)
-                        .foregroundColor(.white)
-                        .cornerRadius(10)
-                }
-                .sheet(isPresented: $isCameraPresented) {
-                    CameraView(selectedImage: $selectedImage, isPresented: $isCameraPresented)
-                }
-                
-                
-                if let selectedImage = selectedImage {
-                    Image(uiImage: selectedImage)
-                        .resizable()
-                        .scaledToFit()
-                        .frame(height: 200)
-                        .cornerRadius(10)
-                        .padding()
-                } else {
-                    Text("No image selected")
-                        .foregroundColor(.gray)
-                        .padding()
-                }
-                
-                
-            }
-            .background( // <-- add background
-                Color.white // <-- this is also a view
-                    .onTapGesture { // <-- add tap gesture to it
-                        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
-                    }
-            )
-            .navigationBarTitle("Add item")
-            .navigationBarItems(
-                leading: Button("Cancel") {
-                    presentationMode.wrappedValue.dismiss()
+                    categoryPickerSection
+                    ownerPickerSection
                     
-                },
-                trailing: Button("Create") {
-                    create(selectedImage!)
-                    presentationMode.wrappedValue.dismiss()
+                    Section(header: Text("Image")) {
+                        
+                        if let selectedImage = selectedImage {
+                            Image(uiImage: selectedImage)
+                                .resizable()
+                                .scaledToFit()
+                                .frame(height: 200)
+                                .cornerRadius(10)
+                                .padding()
+                        } else {
+                            Text("No image selected")
+                                .foregroundColor(.gray)
+                                .padding()
+                        }
+                    }
+                    
                 }
-            )
-        }
-        
-        
-    }
-    
-    private func create(_ image: UIImage) {
-        let context = managedObjectContext
-        
-        if image != nil{
-            print("calling function1")
-            if let imagePath = saveImageToDocumentsDirectory(image: image) {
-                let data = ItemData(name: name, price: Double(price), quantity: quantity, status: ItemStatus(rawValue: status) ?? ItemStatus.available, imageURL: imagePath, category: category!, owner: owner!)
-                itemController.addItem(context: context, data: data)
+                .onTapGesture {
+                    UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+                }
+                .background(Color(uiColor: UIColor(red: 233/255, green: 233/255, blue: 233/255, alpha: 1)))
+                .navigationBarTitle("Add item")
+                .navigationBarItems(
+                    leading: Button("Cancel") {
+                        presentationMode.wrappedValue.dismiss()
+                    },
+                    trailing: Button("Create") {
+                        print("Create")
+                        let isCreated = createItem()
+                        if isCreated{
+                            presentationMode.wrappedValue.dismiss()
+                        }
+                    }
+                ).alert(isPresented: $isAlert){
+                    Alert(
+                        title: Text("Warning"),
+                        message: Text(alertContent),
+                        
+                        dismissButton: .cancel(Text("OK")) {
+                            isAlert = false // Dismiss the alert when OK is tapped
+                        }
+                    )
+                }
+                .onAppear{
+                    checkPhotoLibraryPermission()
+                    // Set default owner if owners is not empty
+                    let owners = OwnerController().findAllOwners(context: managedObjectContext)
+                    if !owners.isEmpty {
+                        owner = owners.first
+                    }
+                    // Set default category if categories is not empty
+                    let categories = CategoryController().findAllCategories(context: managedObjectContext)
+                    if !categories.isEmpty {
+                        category = categories.first
+                    }
+                }
+                CreateItemImageView(selectedImage: $selectedImage, selectedItem: $selectedItem, isCameraPresented: $isCameraPresented)
+                Spacer()
             }
-        }else{
-            print("calling function")
-            let data = ItemData(name: name, price: Double(price), quantity: quantity, status: ItemStatus(rawValue: status) ?? ItemStatus.available, imageURL: "", category: category!, owner: owner!)
-            itemController.addItem(context: context, data: data)
+            
+            
         }
     }
     
+    private var categoryPickerSection: some View {
+        let categories = CategoryController().findAllCategories(context: managedObjectContext)
+        
+        return Section(header: HStack {
+            Text("Category")
+            Spacer()
+            Button("Add category") {
+                isPresentCategoryCreate = true
+            }
+            .font(.caption)
+            .sheet(isPresented: $isPresentCategoryCreate) {
+                CreateCategoryView()
+            }
+        }) {
+            Picker("Select the category", selection: $category) {
+                if categories.isEmpty {
+                    Text("No categories available").tag(nil as Category?)
+                } else {
+                    ForEach(categories, id: \.self) {
+                        Text($0.name!).tag($0 as Category?)
+                    }
+                }
+            }
+            .pickerStyle(.menu)
+        }
+        
+    }
+    
+    private var ownerPickerSection: some View {
+        let owners = OwnerController().findAllOwners(context: managedObjectContext)
+        
+        return Section(header: Text("Owner")) {
+            Picker("Select the owner", selection: $owner) {
+                if owners.isEmpty {
+                    Text("No owners available").tag(nil as Owner?)
+                } else {
+                    ForEach(owners, id: \.self) {
+                        Text($0.name!).tag($0 as Owner?)
+                    }
+                }
+            }
+            .pickerStyle(.menu)
+        }
+    }
+    
+    private func createItem() -> Bool {
+        guard let category = category, let owner = owner else {
+            isAlert = true
+            alertContent = "Please fill all the fields"
+            return false }
+        print("onclick")
+        if name.isEmpty{
+            isAlert = true
+            alertContent = "Please fill all the fields"
+            return false
+        }
+        
+        let imagePath = selectedImage.flatMap { saveImageToDocumentsDirectory(image: $0) } ?? ""
+        print("image \(imagePath)")
+        let itemData = ItemData(
+            name: name,
+            price: Double(price),
+            quantity: quantity,
+            status: ItemStatus(rawValue: status) ?? .available,
+            imageURL: imagePath,
+            category: category,
+            owner: owner
+        )
+        let isCreated = itemController.addItem(context: managedObjectContext, data: itemData)
+        
+        if isCreated {
+            return true
+        }else{
+            isAlert = true
+            alertContent = "Please create with an unique name"
+            return false
+        }
+        
+    }
+    
+    private func checkPhotoLibraryPermission() {
+        let status = PHPhotoLibrary.authorizationStatus()
+        
+        switch status {
+        case .notDetermined:
+            PHPhotoLibrary.requestAuthorization { status in
+                if status == .authorized {
+                    print("Photo library access granted.")
+                } else {
+                    print("Photo library access denied.")
+                }
+            }
+        case .denied, .restricted:
+            print("Photo library access denied.")
+            // Show alert to guide user to Settings
+            DispatchQueue.main.async {
+                self.isAlert = true
+                self.alertContent = "Photo library access is denied. Please enable it in Settings."
+            }
+        case .authorized, .limited:
+            print("Photo library access granted.")
+        @unknown default:
+            fatalError("Unknown authorization status")
+        }
+    }
 }
 
+struct CreateItemImageView: View {
+    @Binding var selectedImage: UIImage?
+    @Binding var selectedItem: PhotosPickerItem?
+    @Binding var isCameraPresented: Bool
+    @State private var isImageChange = false
+    
+    var body: some View {
+        HStack {
+            PhotosPicker(selection:$selectedItem, matching: .any(of: [.images])){
+                Text("Select photo")
+            }
+            Button(action: {
+                isCameraPresented = true
+            }){
+                Text("Take Photo").foregroundStyle(.blue)
+            }
+            .padding()
+            //                    .background(Color.blue)
+            .foregroundColor(.white)
+            .cornerRadius(10)
+            .sheet(isPresented: $isCameraPresented) {
+                CameraView(selectedImage: $selectedImage, isPresented: $isCameraPresented, isCaptured: $isImageChange)
+            }
+            
+            
+        }.onChange(of: selectedImage){
+            _ in
+            Task{
+                if let selectedItem,
+                   let data = try? await selectedItem.loadTransferable(type: Data.self){
+                    if let image = UIImage(data:data){
+                        selectedImage = image
+                    }
+                }
+                
+                selectedItem = nil
+            }
+            
+        }
+    }
+}
 
+func formatter() -> NumberFormatter {
+    let formatter = NumberFormatter()
+    formatter.numberStyle = .decimal
+    return formatter
+}
 
 func saveImageToDocumentsDirectory(image: UIImage) -> String? {
     let filename = UUID().uuidString + ".jpg"
-    
     guard let imageData = image.jpegData(compressionQuality: 1.0) else {
         print("Failed to convert UIImage to Data")
         return nil
     }
-    
-    // Get the URL for the Documents directory
     guard let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else {
         print("Failed to get Documents directory")
         return nil
     }
-    
-    // Append the file name to the Documents directory URL
     let fileURL = documentsDirectory.appendingPathComponent(filename)
-    
     do {
-        // Write the image data to the file URL
         try imageData.write(to: fileURL)
         print("Photo saved to: \(fileURL)")
-        // Determine the relative path
-        let relativePath = fileURL.path.replacingOccurrences(of: FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!.path, with: "")
-        
-        // Return the relative path
-        return relativePath
+        return fileURL.lastPathComponent
     } catch {
         print("Error saving photo: \(error.localizedDescription)")
-        return ""
+        return nil
     }
 }
-
-

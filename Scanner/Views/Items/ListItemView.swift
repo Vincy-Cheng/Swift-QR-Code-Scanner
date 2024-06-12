@@ -58,7 +58,7 @@ struct ListItemView: View {
     }
     
     private func fetchItem() -> [Item] {
-        let items = itemController.findAllItems(context: managedObjectContext,filterString: nil,ownerName: nil,categoryName: nil)
+        let items = itemController.findAllItems(context: managedObjectContext,filterString: nil,ownerName: nil,categoryName: nil,grid: false)
         return items
     }
     

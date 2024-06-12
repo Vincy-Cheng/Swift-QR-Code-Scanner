@@ -28,7 +28,6 @@ struct GridItemView: View {
     let gridLayout = [
         GridItem(.flexible(),spacing: 10),
         GridItem(.flexible(),spacing: 10),
-        //        GridItem(.flexible(),spacing: 5)
     ]
     
     var body: some View {
@@ -214,9 +213,9 @@ struct GridItemView: View {
         let owner = ownerName.isEmpty ? "" : ownerName
         let category = categoryName.isEmpty ? "" : categoryName
 
-        items = itemController.findAllItems(context: managedObjectContext, filterString: filter,ownerName: owner,categoryName: category)
+        items = itemController.findAllItems(context: managedObjectContext, filterString: filter,ownerName: owner,categoryName: category,grid: true)
 
-        // Check the selected item is available (Not over the quantity)
+        
     }
     
     private func countItem(targetItem:Item) -> Int{

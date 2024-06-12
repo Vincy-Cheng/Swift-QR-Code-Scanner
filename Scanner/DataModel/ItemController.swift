@@ -47,7 +47,7 @@ class ItemController: DataController{
     
     func findAllItems(context: NSManagedObjectContext,filterString:String?,ownerName:String?,categoryName:String?,grid:Bool) -> [Item]{
         let request: NSFetchRequest<Item> = Item.fetchRequest()
-        let sortDescriptor = NSSortDescriptor(key: "name", ascending: true)
+        let sortDescriptor = NSSortDescriptor(key: "owner.name", ascending: true)
         request.sortDescriptors = [sortDescriptor]
         
         var predicates: [NSPredicate] = []
@@ -65,7 +65,7 @@ class ItemController: DataController{
         }
         
         if grid == true{
-            predicates.append(NSPredicate(format: "status == available"))
+            predicates.append(NSPredicate(format: "status == %@","available"))
         }
         
         if !predicates.isEmpty {

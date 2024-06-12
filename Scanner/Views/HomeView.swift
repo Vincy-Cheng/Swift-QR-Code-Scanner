@@ -139,7 +139,7 @@ struct HomeView: View {
                                              ]),
                         PerInsertData(ownerName: "y",
                                       items: [PerInsertItemData(name: "KDA 貼紙（新同舊同價）", price: 25, quantity:10,categoryName: "lol"),
-                                              PerInsertItemData(name: "Zelda 掛件", price: 70, quantity:10,categoryName: ""),
+                                              PerInsertItemData(name: "Zelda 掛件", price: 70, quantity:10,categoryName: "Zelda"),
                                               PerInsertItemData(name: "Splat 小袋", price: 40, quantity:10,categoryName: "Splatoon"),
                                               PerInsertItemData(name: "Splat 3 Poster", price: 20, quantity:10,categoryName: "Splatoon"),
                                               PerInsertItemData(name: "Splat 3 明信片組 (冇貼紙）", price: 20, quantity:10,categoryName: "Splatoon"),
@@ -181,6 +181,8 @@ struct HomeView: View {
                     
                 }
             }
+            
+            needsRefresh.toggle()
         }
     }
 }

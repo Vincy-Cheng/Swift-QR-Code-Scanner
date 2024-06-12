@@ -27,19 +27,19 @@ class CategoryController: DataController{
     }
     
     func preInsertCategory(context: NSManagedObjectContext,name:String) -> Category {
-        let category = Category(context: context)
-        category.id = UUID()  // Assign a unique ID
-        category.name = name
-        category.updatedAt = Date()
-        
         let fetchRequest: NSFetchRequest<Category> = Category.fetchRequest()
         fetchRequest.predicate = NSPredicate(format: "name == %@", name as CVarArg)
         
         do {
             let existingCategory = try context.fetch(fetchRequest)
             
+            print(existingCategory.isEmpty)
+            
             if existingCategory.isEmpty{
-
+                let category = Category(context: context)
+                category.id = UUID()  // Assign a unique ID
+                category.name = name
+                category.updatedAt = Date()
                 save(context: context)
                 return category
             }else{

@@ -13,6 +13,8 @@ struct CreateCategoryView: View {
     @Environment(\.managedObjectContext) var managedObjectContext
     @StateObject private var categoryController = CategoryController()
     @State private var name = ""
+    @State private var isAlert = false
+    @State private var alertContent = ""
     
     var body: some View {
         NavigationStack{
@@ -26,10 +28,34 @@ struct CreateCategoryView: View {
                         presentationMode.wrappedValue.dismiss()
                     },
                     trailing: Button("Create") {
-                        categoryController.addCategory(context: managedObjectContext , name: name)
-                        presentationMode.wrappedValue.dismiss()
+                        if name.isEmpty{
+                            isAlert = true
+                            alertContent = "Cannot add empty string as category"
+                        }else{
+                            let created = categoryController.addCategory(context: managedObjectContext , name: name)
+                            if created == true{
+                                alertContent = ""
+                                presentationMode.wrappedValue.dismiss()
+                            }else{
+                                isAlert = true
+                                alertContent = "Category name is used"
+                            }
+                            
+                        }
+                        
                     }
                 )
+                .alert(isPresented: $isAlert){
+                    Alert(
+                        title: Text("Warning"),
+                        message: Text(alertContent),
+                        
+                        dismissButton: .cancel(Text("OK")) {
+                            isAlert = false // Dismiss the alert when OK is tapped
+                            alertContent = ""
+                        }
+                    )
+                }
         }
        
     }

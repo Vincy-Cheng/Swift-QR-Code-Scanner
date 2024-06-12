@@ -123,59 +123,65 @@ struct HomeView: View {
     }
     
     private func preInsert(){
-        let preInsertData = [PerInsertData(ownerName: "Wmc",
-                                  items: [PerInsertItemData(name: "透明魷魚掛件", price: 25,categoryName: "Splatoon"),
-                                          PerInsertItemData(name: "Random 透明魷魚掛件", price: 20,categoryName: "Splatoon"),
-                                          PerInsertItemData(name: "透明魷魚掛件(Set)", price: 200,categoryName: "Splatoon"),
-                                          PerInsertItemData(name: "打工磁石貼", price: 30,categoryName: "Splatoon"),
-                                          PerInsertItemData(name: "偶像串串", price: 25,categoryName: "Splatoon"),
-                                          PerInsertItemData(name: "糖果包", price: 35,categoryName: "Splatoon"),
-                                          PerInsertItemData(name: "打工鐳射掛件", price: 25,categoryName: "Splatoon"),
-                                          PerInsertItemData(name: "大集合包(Random透明魷魚掛件x1+打工磁石貼+打工鐳射掛件)", price: 100,categoryName: "Splatoon"),
-                                          PerInsertItemData(name: "打工袋", price: 65,categoryName: "Splatoon"),
-                                          PerInsertItemData(name: "迷宮飯磁石貼", price: 85,categoryName: "迷宮飯"),
-                                         ]),
-                    PerInsertData(ownerName: "y",
-                                  items: [PerInsertItemData(name: "KDA 貼紙（新同舊同價）", price: 25,categoryName: ""),
-                                          PerInsertItemData(name: "Zelda 掛件", price: 70,categoryName: ""),
-                                          PerInsertItemData(name: "Splat 小袋", price: 40,categoryName: ""),
-                                          PerInsertItemData(name: "Splat 3 Poster", price: 20,categoryName: ""),
-                                          PerInsertItemData(name: "Splat 3 明信片組 (冇貼紙）", price: 20,categoryName: ""),
-                                          PerInsertItemData(name: "Splat 3 B6 貼紙", price: 10,categoryName: ""),
-                                          PerInsertItemData(name: "Splat 小袋", price: 40,categoryName: ""),
-                                          PerInsertItemData(name: "Splat Octo  掛件 White + Black", price: 50,categoryName: ""),
-                                          PerInsertItemData(name: "Splat Octo  掛件 Black", price: 30,categoryName: ""),
-                                          PerInsertItemData(name: "Chili 辛俐立牌", price: 70,categoryName: ""),
-                                          PerInsertItemData(name: "烏波組合  （3 隻）", price: 60,categoryName: ""),
-                                          PerInsertItemData(name: "烏波單隻", price: 25,categoryName: ""),
-                                         ]),
-                    PerInsertData(ownerName: "Ge",
-                                  items: [PerInsertItemData(name: "古魯夏立牌", price: 70,categoryName: ""),
-                                          PerInsertItemData(name: "奇樹立牌", price: 70,categoryName: ""),
-                                          PerInsertItemData(name: "Koharu 立牌", price: 70,categoryName: ""),
-                                         ]),
-                    PerInsertData(ownerName: "Chow",
-                                  items: [PerInsertItemData(name: "Holo 飯友立牌", price: 15,categoryName: ""),
-                                          PerInsertItemData(name: "Holo 立牌", price: 45,categoryName: ""),
-                                          PerInsertItemData(name: "Splatoon 掛件扣針", price: 35,categoryName: ""),
-                                          PerInsertItemData(name: "水藝大師飯友立牌", price: 45,categoryName: ""),
-                                          PerInsertItemData(name: "Ina post card", price: 10,categoryName: ""),
-                                          PerInsertItemData(name: "Holo 鎖匙扣", price: 35,categoryName: ""),
-                                         ])
-        ]
-        
-        for data in preInsertData{
-            let owner = OwnerController().preInsertOwner(context: managedObjectContext, name: data.ownerName)
+        let inital = OwnerController().findAllOwners(context: managedObjectContext)
+        if inital.isEmpty{
+            let preInsertData = [PerInsertData(ownerName: "Wmc",
+                                               items: [PerInsertItemData(name: "透明魷魚掛件", price: 25, quantity:180  ,categoryName: "Splatoon"),
+                                              PerInsertItemData(name: "Random 透明魷魚掛件", price: 20, quantity:180,categoryName: "Splatoon"),
+                                              PerInsertItemData(name: "透明魷魚掛件(Set)", price: 200, quantity:10,categoryName: "Splatoon"),
+                                              PerInsertItemData(name: "打工磁石貼", price: 30, quantity:25,categoryName: "Splatoon"),
+                                              PerInsertItemData(name: "偶像串串", price: 25, quantity:10,categoryName: "Splatoon"),
+                                              PerInsertItemData(name: "糖果包", price: 35, quantity:10,categoryName: "Splatoon"),
+                                              PerInsertItemData(name: "打工鐳射掛件", price: 25, quantity:10,categoryName: "Splatoon"),
+                                              PerInsertItemData(name: "大集合包(Random透明魷魚掛件x1+打工磁石貼+打工鐳射掛件)", price: 100, quantity:10,categoryName: "Splatoon"),
+                                              PerInsertItemData(name: "打工袋", price: 65, quantity:10,categoryName: "Splatoon"),
+                                              PerInsertItemData(name: "迷宮飯磁石貼", price: 85, quantity:50,categoryName: "迷宮飯"),
+                                             ]),
+                        PerInsertData(ownerName: "y",
+                                      items: [PerInsertItemData(name: "KDA 貼紙（新同舊同價）", price: 25, quantity:10,categoryName: "lol"),
+                                              PerInsertItemData(name: "Zelda 掛件", price: 70, quantity:10,categoryName: ""),
+                                              PerInsertItemData(name: "Splat 小袋", price: 40, quantity:10,categoryName: "Splatoon"),
+                                              PerInsertItemData(name: "Splat 3 Poster", price: 20, quantity:10,categoryName: "Splatoon"),
+                                              PerInsertItemData(name: "Splat 3 明信片組 (冇貼紙）", price: 20, quantity:10,categoryName: "Splatoon"),
+                                              PerInsertItemData(name: "Splat 3 B6 貼紙", price: 10, quantity:10,categoryName: "Splatoon"),
+                                              PerInsertItemData(name: "Splat Octo  掛件 White + Black", price: 50, quantity:10,categoryName: "Splatoon"),
+                                              PerInsertItemData(name: "Splat Octo  掛件 Black", price: 30, quantity:10,categoryName: "Splatoon"),
+                                              PerInsertItemData(name: "Chili 辛俐立牌", price: 70, quantity:10,categoryName: "Pokemon"),
+                                              PerInsertItemData(name: "烏波組合  （3 隻）", price: 60, quantity:10,categoryName: "Pokemon"),
+                                              PerInsertItemData(name: "烏波單隻", price: 25, quantity:10,categoryName: "Pokemon"),
+                                             ]),
+                        PerInsertData(ownerName: "Ge",
+                                      items: [PerInsertItemData(name: "古魯夏立牌", price: 70, quantity:10,categoryName: "Pokemon"),
+                                              PerInsertItemData(name: "奇樹立牌", price: 70, quantity:10,categoryName: "Pokemon"),
+                                              PerInsertItemData(name: "Koharu 立牌", price: 70, quantity:10,categoryName: "BA"),
+                                             ]),
+                        PerInsertData(ownerName: "Chow",
+                                      items: [PerInsertItemData(name: "Holo 飯友立牌", price: 15, quantity:10,categoryName: "Hololive"),
+                                              PerInsertItemData(name: "Holo 立牌", price: 45, quantity:2,categoryName: "Hololive"),
+                                              PerInsertItemData(name: "Splatoon 掛件扣針", price: 35, quantity:10,categoryName: "Splatoon"),
+                                              PerInsertItemData(name: "水藝大師飯友立牌", price: 45, quantity:3,categoryName: "MH"),
+                                              PerInsertItemData(name: "Ina post card", price: 10, quantity:10,categoryName: "Hololive"),
+                                              PerInsertItemData(name: "Holo 鎖匙扣", price: 35, quantity:6,categoryName: "Hololive"),
+                                              PerInsertItemData(name: "迷宮飯立牌", price: 80, quantity:50,categoryName: "迷宮飯"),
+                                              PerInsertItemData(name: "迷宮飯小卡", price: 15, quantity:80,categoryName: "迷宮飯"),
+                                              PerInsertItemData(name: "迷宮飯貼紙", price: 10, quantity:50,categoryName: "迷宮飯"),
+                                              PerInsertItemData(name: "迷宮飯雀扣", price: 10, quantity:50,categoryName: "迷宮飯"),
+                                              PerInsertItemData(name: "迷宮飯大禮包(迷宮飯立牌+迷宮飯小卡+迷宮飯貼紙+迷宮飯雀扣)", price: 100, quantity:10,categoryName: "迷宮飯"),
+                                             ])
+            ]
             
-            for item in data.items{
-                var category = CategoryController().preInsertCategory(context: managedObjectContext, name: item.categoryName)
+            for data in preInsertData{
+                let owner = OwnerController().preInsertOwner(context: managedObjectContext, name: data.ownerName)
                 
-                let itemData = ItemData(name: item.name, price: item.price, quantity: 10, status: ItemStatus.available, imageURL: "", category: category, owner: owner)
-                let created = itemController.addItem(context: managedObjectContext, data: itemData)
-                
+                for item in data.items{
+                    var category = CategoryController().preInsertCategory(context: managedObjectContext, name: item.categoryName)
+                    
+                    let itemData = ItemData(name: item.name, price: item.price, quantity: item.quantity, status: ItemStatus.available, imageURL: "", category: category, owner: owner)
+                    let created = itemController.addItem(context: managedObjectContext, data: itemData)
+                    
+                }
             }
         }
-
     }
 }
 
@@ -201,6 +207,7 @@ struct PerInsertData{
 struct PerInsertItemData{
     let name: String
     let price: Double
+    let quantity: Int
     let categoryName: String
 }
 

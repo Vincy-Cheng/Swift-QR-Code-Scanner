@@ -45,10 +45,14 @@ struct PaymentView: View {
                     Button(action: {
                         isConfirm = true
                     }) {
-                        Label("Save to record", systemImage: "square.and.arrow.down")
-                            .foregroundColor(inputValue - sumUp(groupedItems: groupItems(selectedItems: selectedItems)) < 0 ? Color.gray :Color.blue)
-                        
-                    }.disabled(inputValue - sumUp(groupedItems: groupItems(selectedItems: selectedItems)) < 0)
+                        HStack(alignment: .center) {
+                            Text("Save to record")
+                            Image(systemName: "square.and.arrow.down")
+                                .foregroundColor(inputValue - sumUp(groupedItems: groupItems(selectedItems: selectedItems)) < 0 ? Color.gray :Color.blue)
+                            
+                        }
+                    }
+                    .disabled(inputValue - sumUp(groupedItems: groupItems(selectedItems: selectedItems)) < 0)
                     
                 }
             }

@@ -31,6 +31,8 @@ class TransactionController: DataController{
             transactionItem.name = item.name
             transactionItem.price = item.price
             transactionItem.quantity = Int32(quantity) // Set the quantity
+            transactionItem.owner = item.owner!.name
+            transactionItem.category = item.category!.name
             
             // Associate the TransactionItem with the Transaction
             transactionItem.transaction = transaction

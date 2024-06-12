@@ -26,7 +26,7 @@ struct ItemData {
 class ItemController: DataController{
     
     func addItem(context: NSManagedObjectContext,data: ItemData) -> Bool {
-        let existingItem = findAllItems(context: context,filterString: nil,ownerName: nil,categoryName: nil)
+        let existingItem = findAllItems(context: context,filterString: nil,ownerName: nil,categoryName: nil,grid: false)
         if existingItem.contains(where: { $0.name == data.name }) {
             return false // Name is already in use
         }
@@ -44,7 +44,8 @@ class ItemController: DataController{
         save(context: context)
         return true
     }
-    func findAllItems(context: NSManagedObjectContext,filterString:String?,ownerName:String?,categoryName:String?) -> [Item]{
+    
+    func findAllItems(context: NSManagedObjectContext,filterString:String?,ownerName:String?,categoryName:String?,grid:Bool) -> [Item]{
         let request: NSFetchRequest<Item> = Item.fetchRequest()
         let sortDescriptor = NSSortDescriptor(key: "name", ascending: true)
         request.sortDescriptors = [sortDescriptor]
@@ -63,10 +64,13 @@ class ItemController: DataController{
             predicates.append(NSPredicate(format: "category.name == %@", categoryName))
         }
         
+        if grid == true{
+            predicates.append(NSPredicate(format: "status == available"))
+        }
+        
         if !predicates.isEmpty {
             request.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: predicates)
         }
-        
         
         // Set the relationships to be fetched with the main entity
         request.relationshipKeyPathsForPrefetching = ["owner", "category"]

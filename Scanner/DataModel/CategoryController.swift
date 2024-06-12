@@ -26,6 +26,36 @@ class CategoryController: DataController{
         return true
     }
     
+    func preInsertCategory(context: NSManagedObjectContext,name:String) -> Category {
+        let category = Category(context: context)
+        category.id = UUID()  // Assign a unique ID
+        category.name = name
+        category.updatedAt = Date()
+        
+        let fetchRequest: NSFetchRequest<Category> = Category.fetchRequest()
+        fetchRequest.predicate = NSPredicate(format: "name == %@", name as CVarArg)
+        
+        do {
+            let existingCategory = try context.fetch(fetchRequest)
+            
+            if existingCategory.isEmpty{
+
+                save(context: context)
+                return category
+            }else{
+                return existingCategory.first!
+            }
+        } catch {
+            let category = Category(context: context)
+            category.id = UUID()  // Assign a unique ID
+            category.name = name
+            category.updatedAt = Date()
+            save(context: context)
+            return category
+        }
+  
+    }
+    
     func findAllCategories(context: NSManagedObjectContext) -> [Category]{
         let request: NSFetchRequest<Category> = Category.fetchRequest()
         let sortDescriptor = NSSortDescriptor(key: "name", ascending: true)
@@ -38,6 +68,19 @@ class CategoryController: DataController{
         } catch {
             print("Failed to fetch owners: \(error.localizedDescription)")
             return []
+        }
+    }
+    
+    func findCategory(context: NSManagedObjectContext,name: String) -> Category? {
+        let fetchRequest: NSFetchRequest<Category> = Category.fetchRequest()
+        fetchRequest.predicate = NSPredicate(format: "name == %@", name as CVarArg)
+        
+        do {
+            let category = try context.fetch(fetchRequest)
+            return category.first
+        } catch {
+            print("Failed to fetch category: \(error)")
+            return nil
         }
     }
     

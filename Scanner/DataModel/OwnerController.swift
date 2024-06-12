@@ -27,6 +27,16 @@ class OwnerController: DataController{
         return true // Owner added successfully
     }
     
+    func preInsertOwner(context: NSManagedObjectContext,name:String) -> Owner{
+        let owner = Owner(context: context)
+        owner.id = UUID()  // Assign a unique ID
+        owner.name = name
+        owner.updatedAt = Date()
+        save(context: context)
+        
+        return owner // Owner added successfully
+    }
+    
     func findAllOwners(context: NSManagedObjectContext) -> [Owner] {
         let request: NSFetchRequest<Owner> = Owner.fetchRequest()
         let sortDescriptor = NSSortDescriptor(key: "name", ascending: true)

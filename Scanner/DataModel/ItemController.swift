@@ -104,7 +104,7 @@ class ItemController: DataController{
         item.owner = itemData.owner
         item.price = itemData.price
         item.quantity = Int32(itemData.quantity)
-        item.status = item.status
+        item.status = itemData.status.rawValue
         item.updatedAt = Date()
         save(context: context)
     }

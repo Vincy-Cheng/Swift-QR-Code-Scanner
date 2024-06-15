@@ -8,7 +8,6 @@
 import Foundation
 import CoreData
 
-
 class TransactionController: DataController{
     
     func addTransaction(context: NSManagedObjectContext,payment:String,paid: Double, items:[Item]) -> Bool {
@@ -36,12 +35,13 @@ class TransactionController: DataController{
             
             // Associate the TransactionItem with the Transaction
             transactionItem.transaction = transaction
+            transactionItem.item = item
         }
         save(context: context)
         return true
     }
     
-    func findAllTransaction(context: NSManagedObjectContext)-> [Transaction]{
+    func findAllTransaction(context: NSManagedObjectContext,date: Date,groupingMethod: String)-> [Transaction]{
         let request: NSFetchRequest<Transaction> = Transaction.fetchRequest()
         let sortDescriptor = NSSortDescriptor(key: "createdAt", ascending: true)
         
@@ -49,12 +49,26 @@ class TransactionController: DataController{
         
         request.relationshipKeyPathsForPrefetching = ["transactionItems"]
         
+        var predicates: [NSPredicate] = []
+        
+        if groupingMethod != "all"{
+            let calendar = Calendar.current
+            let startOfDay = calendar.startOfDay(for: date)
+            let endOfDay = calendar.date(byAdding: .day, value: 1, to: startOfDay)?.addingTimeInterval(-1)
+            
+            predicates.append(NSPredicate(format: "createdAt >= %@ AND createdAt <= %@", startOfDay as NSDate, endOfDay! as NSDate))
+        }
+        
+        if !predicates.isEmpty {
+            request.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: predicates)
+        }
+        
         do {
             let result = try context.fetch(request)
             return result
             
         } catch {
-            print("Failed to fetch owners: \(error.localizedDescription)")
+            print("Failed to fetch transactions: \(error.localizedDescription)")
             return []
         }
         

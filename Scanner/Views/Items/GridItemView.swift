@@ -59,6 +59,7 @@ struct GridItemView: View {
                             Text(owner.name ?? "").tag(owner.name ?? "")
                         }
                     }
+                    .foregroundStyle(primaryColor)
                     .pickerStyle(.menu)
                 }
                 HStack{
@@ -69,6 +70,7 @@ struct GridItemView: View {
                             Text(category.name ?? "").tag(category.name ?? "")
                         }
                     }
+                    .foregroundStyle(primaryColor)
                     .pickerStyle(.menu)
                 }
             }
@@ -92,7 +94,7 @@ struct GridItemView: View {
                                 Image(uiImage: uiImage!)
                                     .resizable()
                                     .scaledToFill()
-                                    .frame(width: geometry.size.width / 2.5, height: geometry.size.width / 2.5)
+                                    .frame(width: geometry.size.width / 3, height: geometry.size.width / 3)
                                     .clipped()
                                     .cornerRadius(20)
                                     .padding(10)
@@ -102,7 +104,7 @@ struct GridItemView: View {
                                 Image("Image-Not-Found")
                                     .resizable()
                                     .scaledToFill()
-                                    .frame(width: geometry.size.width / 2.5, height: geometry.size.width / 2.5)
+                                    .frame(width: geometry.size.width / 3, height: geometry.size.width / 3)
                                     .clipped()
                                     .cornerRadius(20)
                                     .saturation(item.quantity <= 0 ? 0 : 1 )
@@ -111,18 +113,18 @@ struct GridItemView: View {
                             
                             VStack {
                                 Text(item.name!)
-                                    .foregroundColor(uiImage == nil ? Color(uiColor: UIColor(red: 120/255, green: 108/255, blue: 255/255, alpha: 1)): Color.white)
+                                    .foregroundColor(uiImage == nil ? primaryColor: Color.white)
                                     .font(.system(size: 18)) // Adjust font size as needed
                                     .fontWeight(.bold)
                                     .padding(.top,20)
-                                    .frame(maxWidth: geometry.size.width / 2.5)
+                                    .frame(maxWidth: geometry.size.width / 3)
                                 Spacer()
                                 
                                 Text("$\(Int(item.price))")
-                                    .foregroundColor(uiImage == nil ? Color(uiColor: UIColor(red: 120/255, green: 108/255, blue: 255/255, alpha: 1)): Color.white)
+                                    .foregroundColor(uiImage == nil ? primaryColor: Color.white)
                                     .font(.system(size: 18)) // Adjust font size as needed
                                     .fontWeight(.bold)
-                                    .frame(maxWidth: geometry.size.width / 2.5)
+                                    .frame(maxWidth: geometry.size.width / 3)
                                 HStack {
                                     Button(action: {
                                         // Minus action
@@ -133,7 +135,7 @@ struct GridItemView: View {
                                         
                                     }) {
                                         Image(systemName: "minus.circle.fill")
-                                            .foregroundColor(Color(uiColor: UIColor(red: 120/255, green: 108/255, blue: 255/255, alpha: 1)))
+                                            .foregroundColor(primaryColor)
                                             .font(.system(size: 28))
                                     }
                                     .padding([.leading], 20) // Adjust the trailing padding
@@ -163,7 +165,7 @@ struct GridItemView: View {
                                         
                                     }) {
                                         Image(systemName: "plus.circle.fill")
-                                            .foregroundColor(Color(uiColor: UIColor(red: 120/255, green: 108/255, blue: 255/255, alpha: 1)))
+                                            .foregroundColor(primaryColor)
                                             .font(.system(size: 28))
                                     }
                                     .padding([.trailing], 20)
@@ -182,9 +184,9 @@ struct GridItemView: View {
                         isSheetPresented = true
                     }) {
                         Image(systemName: "plus")
-                            .foregroundColor(Color(uiColor: UIColor(red: 120/255, green: 108/255, blue: 255/255, alpha: 1)))
+                            .foregroundColor(primaryColor)
                             .font(.system(size: 48))
-                            .frame(width: geometry.size.width / 2.5, height: geometry.size.width / 2.5)
+                            .frame(width: geometry.size.width / 3, height: geometry.size.width / 3)
                             .background(Color.white)
                             .cornerRadius(20)
                         

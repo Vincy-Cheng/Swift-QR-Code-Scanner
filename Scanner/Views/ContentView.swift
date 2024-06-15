@@ -12,8 +12,7 @@ struct ContentView: View {
     @State var isPresentingScannerView = false
     
     var body: some View {
-//        HomeView()
-        GroupedTransactionView()
+        HomeView()
     }
     
 }

@@ -9,7 +9,6 @@ import SwiftUI
 import CoreData
 
 
-
 struct ListPurchaseLogView:View {
     
     @FetchRequest(sortDescriptors: [NSSortDescriptor(key: "id", ascending: true)]) var purchaseLogs: FetchedResults<PurchaseLog>

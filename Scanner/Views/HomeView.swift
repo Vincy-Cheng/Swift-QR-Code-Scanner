@@ -8,6 +8,8 @@
 import SwiftUI
 import CoreData
 
+let primaryColor:Color = Color(uiColor: UIColor(red: 120/255, green: 108/255, blue: 255/255, alpha: 1))
+
 struct HomeView: View {
     @State private var selectedItems: [Item] = []
     @State private var needsRefresh: Bool = false
@@ -80,7 +82,7 @@ struct HomeView: View {
                                 )
                             }
                             NavigationLink {
-                                GroupedTransactionView()
+                                ListTransactionView()
                                 
                             } label: {
                                 Label(
@@ -102,7 +104,7 @@ struct HomeView: View {
                             Image(systemName: "list.bullet")
                                 .resizable()
                                 .frame(width: 24, height: 24)
-                                .foregroundColor(.blue)
+                                .foregroundColor(primaryColor)
                         }
                     }
                 }
@@ -138,22 +140,26 @@ struct HomeView: View {
                                               PerInsertItemData(name: "迷宮飯磁石貼", price: 85, quantity:50,categoryName: "迷宮飯"),
                                              ]),
                         PerInsertData(ownerName: "y",
-                                      items: [PerInsertItemData(name: "KDA 貼紙（新同舊同價）", price: 25, quantity:10,categoryName: "lol"),
-                                              PerInsertItemData(name: "Zelda 掛件", price: 70, quantity:10,categoryName: "Zelda"),
-                                              PerInsertItemData(name: "Splat 小袋", price: 40, quantity:10,categoryName: "Splatoon"),
-                                              PerInsertItemData(name: "Splat 3 Poster", price: 20, quantity:10,categoryName: "Splatoon"),
-                                              PerInsertItemData(name: "Splat 3 明信片組 (冇貼紙）", price: 20, quantity:10,categoryName: "Splatoon"),
-                                              PerInsertItemData(name: "Splat 3 B6 貼紙", price: 10, quantity:10,categoryName: "Splatoon"),
-                                              PerInsertItemData(name: "Splat Octo  掛件 White + Black", price: 50, quantity:10,categoryName: "Splatoon"),
-                                              PerInsertItemData(name: "Splat Octo  掛件 Black", price: 30, quantity:10,categoryName: "Splatoon"),
-                                              PerInsertItemData(name: "Chili 辛俐立牌", price: 70, quantity:10,categoryName: "Pokemon"),
-                                              PerInsertItemData(name: "烏波組合  （3 隻）", price: 60, quantity:10,categoryName: "Pokemon"),
-                                              PerInsertItemData(name: "烏波單隻", price: 25, quantity:10,categoryName: "Pokemon"),
+                                      items: [PerInsertItemData(name: "KDA 貼紙（新同舊同價）", price: 25, quantity:34,categoryName: "lol"),
+                                              PerInsertItemData(name: "Yummi 掛件 + 貼紙", price: 20, quantity:15,categoryName: "lol"),
+                                              PerInsertItemData(name: "Zelda 掛件", price: 70, quantity:50,categoryName: "Zelda"),
+                                              PerInsertItemData(name: "Splat 小袋", price: 40, quantity:20,categoryName: "Splatoon"),
+                                              PerInsertItemData(name: "Splat 3 Poster", price: 20, quantity:100,categoryName: "Splatoon"),
+                                              PerInsertItemData(name: "Splat 3 明信片組 (冇貼紙）", price: 20, quantity:100,categoryName: "Splatoon"),
+                                              PerInsertItemData(name: "Splat 3 B6 貼紙", price: 10, quantity:100,categoryName: "Splatoon"),
+                                              PerInsertItemData(name: "Splat Octo  掛件 White + Black", price: 50, quantity:100,categoryName: "Splatoon"),
+                                              PerInsertItemData(name: "Splat Octo  掛件 Black", price: 30, quantity:50,categoryName: "Splatoon"),
+                                              PerInsertItemData(name: "Chili 辛俐立牌", price: 70, quantity:19,categoryName: "Pokemon"),
+                                              PerInsertItemData(name: "御三家小卡", price: 10, quantity:30,categoryName: "Pokemon"),
+                                              PerInsertItemData(name: "草貓貼紙+ 小相框", price: 10, quantity:24,categoryName: "Pokemon"),
+                                              PerInsertItemData(name: "烏波組合  （3 隻）", price: 60, quantity:100,categoryName: "Pokemon"),
+                                              PerInsertItemData(name: "烏波單隻", price: 25, quantity:20,categoryName: "Pokemon"),
                                              ]),
                         PerInsertData(ownerName: "Ge",
-                                      items: [PerInsertItemData(name: "古魯夏立牌", price: 70, quantity:10,categoryName: "Pokemon"),
-                                              PerInsertItemData(name: "奇樹立牌", price: 70, quantity:10,categoryName: "Pokemon"),
-                                              PerInsertItemData(name: "Koharu 立牌", price: 70, quantity:10,categoryName: "BA"),
+                                      items: [PerInsertItemData(name: "古魯夏立牌", price: 70, quantity:12,categoryName: "Pokemon"),
+                                              PerInsertItemData(name: "奇樹立牌", price: 70, quantity:12,categoryName: "Pokemon"),
+                                              PerInsertItemData(name: "瑪力露麗", price: 25, quantity:16,categoryName: "Pokemon"),
+                                              PerInsertItemData(name: "Koharu 立牌", price: 70, quantity:30,categoryName: "BA"),
                                              ]),
                         PerInsertData(ownerName: "Chow",
                                       items: [PerInsertItemData(name: "Holo 飯友立牌", price: 15, quantity:10,categoryName: "Hololive"),
@@ -166,7 +172,7 @@ struct HomeView: View {
                                               PerInsertItemData(name: "迷宮飯小卡", price: 15, quantity:80,categoryName: "迷宮飯"),
                                               PerInsertItemData(name: "迷宮飯貼紙", price: 10, quantity:50,categoryName: "迷宮飯"),
                                               PerInsertItemData(name: "迷宮飯雀扣", price: 10, quantity:50,categoryName: "迷宮飯"),
-                                              PerInsertItemData(name: "迷宮飯大禮包(迷宮飯立牌+迷宮飯小卡+迷宮飯貼紙+迷宮飯雀扣)", price: 100, quantity:10,categoryName: "迷宮飯"),
+                                              PerInsertItemData(name: "迷宮飯大禮包(迷宮飯立牌+迷宮飯小卡+迷宮飯貼紙+迷宮飯雀扣)", price: 100, quantity:100,categoryName: "迷宮飯"),
                                              ])
             ]
             

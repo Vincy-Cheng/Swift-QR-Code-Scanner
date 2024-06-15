@@ -45,14 +45,14 @@ struct CalculateView: View {
                         HStack{
                            
                             if isValid{
-                                Text("Next").font(.title).foregroundStyle(Color(uiColor: UIColor(red: 120/255, green: 108/255, blue: 255/255, alpha: 1)))
-                                Image(systemName: "arrowshape.right.fill")
+                                Text("Next").font(.title).foregroundStyle(primaryColor)
+                                Image(systemName: "chevron.right.2")
                                     .resizable()
                                     .frame(width: 24, height: 24)
-                                    .foregroundColor(Color(uiColor: UIColor(red: 120/255, green: 108/255, blue: 255/255, alpha: 1)))
+                                    .foregroundColor(primaryColor)
                             }else{
                                 Text("Next").font(.title).foregroundStyle(.gray)
-                                Image(systemName: "arrowshape.right.fill")
+                                Image(systemName: "chevron.right.2")
                                     .resizable()
                                     .frame(width: 24, height: 24)
                                     .foregroundColor(.gray)
@@ -134,7 +134,7 @@ struct DashedLineView: View {
             .stroke(style: StrokeStyle(lineWidth: 2, dash: [5]))
             .foregroundColor(.gray)
             .frame(height: 2)
-            .padding(.horizontal) // Adjust the horizontal padding as needed
+            .padding(.trailing) // Adjust the horizontal padding as needed
         }
     }
 }

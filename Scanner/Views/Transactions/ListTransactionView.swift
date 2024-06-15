@@ -14,7 +14,8 @@ struct ListTransactionView: View {
     @StateObject private var itemController = ItemController()
     @State private var transactions: [Transaction] = []
     var body: some View {
-        VStack{
+        NavigationStack{
+            
             List{
                 ForEach(transactions, id: \.self) { transaction in
                     NavigationLink{
@@ -22,19 +23,30 @@ struct ListTransactionView: View {
                     } label: {
                         Text(formattedDate(from: transaction.createdAt!))
                     }
-//                    Text(formattedDate(from: transaction.createdAt!))
-                    //                    Section(header: Text(group.ownerName).font(.headline)){
-                    //                        ForEach(group.items, id: \.self) {item in
-                    //                            NavigationLink {
-                    //                                // destination view to navigation to
-                    //                                ItemView(item: item,isPresented: $isSheetPresented)
-                    //                            } label: {
-                    //                                Text(item.name!)
-                    //                            }
-                    //                        }
-                    //                    }
-                }
+                }.onDelete(perform: deleteTransaction)
+                
+//                .onDelete(perform: { indexSet in
+//                    let selectedTransaction = indexSet.map { transactions[$0] }
+//                    transactionController.deleteTransaction(context: managedObjectContext, transaction: selectedTransaction.first!)
+//                    fetchTransactions()
+//                })
             }.navigationTitle("Records")
+            
+            
+            HStack(alignment: .lastTextBaseline){
+                Text("Daily Record").foregroundColor(primaryColor).font(.title)
+                Spacer()
+                NavigationLink{
+                    GroupedTransactionView()
+                } label: {
+                    Label(
+                        title: { Text("Next").foregroundColor(primaryColor) },
+                        icon: { Image(systemName: "chevron.right.2").foregroundColor(primaryColor) }
+                    )
+                }
+            }.padding()
+                .frame(alignment: .bottom)
+            
         }.onAppear{
             fetchTransactions()
         }
@@ -42,26 +54,18 @@ struct ListTransactionView: View {
     }
     
     private func fetchTransactions() {
-        let transaction = transactionController.findAllTransaction(context: managedObjectContext)
+        let transaction = transactionController.findAllTransaction(context: managedObjectContext,date: Date(),groupingMethod: "all")
         transactions = transaction
         print(transaction)
     }
     
-    
-}
-
-func unWrapItems(transactions: [Transaction],context:NSManagedObjectContext) -> [Item]{
-    let items:[Item] = []
-//    for transaction in transactions {
-//        guard let itemQuantities = transaction.itemQuantities as? [Item] else {
-//            return []
-//        }
-        
-//        for itemQuantity in itemQuantities {
-////            let item = ItemController().findItemById(context: context, withId: itemQuantity)
-//        }
-//    }
-    return items
+    private func deleteTransaction(at offsets: IndexSet) {
+        for index in offsets {
+            let transaction = transactions[index]
+            transactionController.deleteTransaction(context: managedObjectContext, transaction: transaction)
+        }
+        fetchTransactions()
+    }
 }
 
 #Preview {

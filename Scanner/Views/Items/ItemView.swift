@@ -53,7 +53,7 @@ struct ItemView: View {
                     Section(header: Text("Status")) {
                         Picker("Select the status", selection: $status) {
                             ForEach(options, id: \.self) {
-                                Text($0)
+                                Text($0).tag($0)
                             }
                         }
                         .pickerStyle(.menu)
@@ -111,7 +111,7 @@ struct ItemView: View {
                 )
             }
             
-            CreateItemImageView(selectedImage: $selectedImage, selectedItem: $selectedItem, isCameraPresented: $isCameraPresented)
+            EditItemImageView(selectedImage: $selectedImage, selectedItem: $selectedItem, isCameraPresented: $isCameraPresented,isImageChange: $isImageChange)
             Spacer()
             }
             
@@ -138,7 +138,9 @@ struct ItemView: View {
             .pickerStyle(.menu)
         }
         .onAppear {
-            category = categories.first
+            if category == nil{
+                category = categories.first
+            }
         }
     }
     
@@ -168,7 +170,9 @@ struct ItemView: View {
             .pickerStyle(.menu)
         }
         .onAppear {
-            owner = fetchOwners().first
+            if owner == nil{
+                owner = fetchOwners().first
+            }
         }
     }
     
@@ -200,13 +204,19 @@ struct ItemView: View {
         var imageURL = item.imageURL ?? ""
         if isImageChange, let selectedImage = selectedImage {
             let imagePath = saveImageToDocumentsDirectory(image: selectedImage)!
+//            let oldFilePath = getFileURL(path: imageURL)
+//            deleteFile(at: oldFilePath!)
             imageURL = imagePath
         }
+        guard let updatedStatus = ItemStatus(rawValue: status) else {
+            fatalError("Invalid status value")
+        }
+       
         let itemData = ItemData(
             name: name,
             price: Double(price),
             quantity: quantity,
-            status: ItemStatus(rawValue: status) ?? ItemStatus.available,
+            status: updatedStatus,
             imageURL: imageURL,
             category: category!,
             owner: owner!
@@ -216,18 +226,20 @@ struct ItemView: View {
     
     private func deleteItem() {
         guard let relativePath = item.imageURL else { return }
-        
-        // Get the app's documents directory
-        guard let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else {
-            print("Failed to get Documents directory")
-            return
-        }
-        
-        // Construct the absolute file URL by appending the relative path
-        let fileURL = documentsDirectory.appendingPathComponent(relativePath)
+        let fileURL = getFileURL(path: relativePath)
         
         ItemController().deleteItem(context: managedObjectContext, item: item)
-        deleteFile(at: fileURL)
+        deleteFile(at: fileURL!)
+    }
+    
+    private func getFileURL(path:String) -> URL?{
+        let relativePath = path
+        guard let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else {
+            print("Failed to get Documents directory")
+            return nil
+        }
+        let fileURL = documentsDirectory.appendingPathComponent(relativePath)
+        return fileURL
     }
     
     private func deleteFile(at url: URL) {
@@ -246,7 +258,7 @@ struct EditItemImageView: View {
     @Binding var selectedImage: UIImage?
     @Binding var selectedItem: PhotosPickerItem?
     @Binding var isCameraPresented: Bool
-    @State private var isImageChange = false
+    @Binding var isImageChange: Bool
     
     var body: some View {
         HStack {
@@ -259,7 +271,6 @@ struct EditItemImageView: View {
                 Text("Take Photo").foregroundStyle(.blue)
             }
             .padding()
-            //                    .background(Color.blue)
             .foregroundColor(.white)
             .cornerRadius(10)
             .sheet(isPresented: $isCameraPresented) {
@@ -274,6 +285,7 @@ struct EditItemImageView: View {
                    let data = try? await selectedItem.loadTransferable(type: Data.self){
                     if let image = UIImage(data:data){
                         selectedImage = image
+                        isImageChange = true
                     }
                 }
                 

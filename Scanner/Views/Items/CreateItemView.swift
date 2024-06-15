@@ -173,7 +173,6 @@ struct CreateItemView: View {
             isAlert = true
             alertContent = "Please fill all the fields"
             return false }
-        print("onclick")
         if name.isEmpty{
             isAlert = true
             alertContent = "Please fill all the fields"
@@ -182,11 +181,16 @@ struct CreateItemView: View {
         
         let imagePath = selectedImage.flatMap { saveImageToDocumentsDirectory(image: $0) } ?? ""
         print("image \(imagePath)")
+        
+        guard let status = ItemStatus(rawValue: status) else {
+            fatalError("Invalid status value")
+        }
+        
         let itemData = ItemData(
             name: name,
             price: Double(price),
             quantity: quantity,
-            status: ItemStatus(rawValue: status) ?? .available,
+            status: status,
             imageURL: imagePath,
             category: category,
             owner: owner

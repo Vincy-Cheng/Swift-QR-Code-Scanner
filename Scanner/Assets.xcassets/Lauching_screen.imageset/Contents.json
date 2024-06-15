@@ -1,15 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "Mark II.png",
+      "filename" : "Lauching_screen.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
+      "filename" : "Lauching_screen 2.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
+      "filename" : "Lauching_screen 1.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

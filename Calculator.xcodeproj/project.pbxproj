@@ -240,6 +240,7 @@
 		03CC819A2B1CD439003CD327 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				03DEDA2F2C2090EA00FB91C4 /* Deprecated */,
 				03DEDA192C14BA9900FB91C4 /* Transactions */,
 				03DEDA102C13666A00FB91C4 /* Categories */,
 				03587D6E2C0C4F3D000C0B04 /* HomeView.swift */,
@@ -247,13 +248,6 @@
 				030915622C11EC59009767FA /* Items */,
 				037C8CBB2B122C7C005F3DF6 /* ContentView.swift */,
 				03587D772C0E1035000C0B04 /* Owners */,
-				03598D682B1638F000739FEF /* ScannerView.swift */,
-				03DEDA0C2C13570700FB91C4 /* CameraView.swift */,
-				03DEDA0E2C13579800FB91C4 /* CamerPreviewView.swift */,
-				03CC81982B1CD353003CD327 /* ListPurchaseLogView.swift */,
-				03F76EC52B21B5790072FE8E /* GroupedProductsView.swift */,
-				03F76EC72B21CD9D0072FE8E /* PurchaseLogView.swift */,
-				03CC819B2B1CD4B4003CD327 /* AddPurchaseLogView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -278,6 +272,20 @@
 				03DEDA242C189B8300FB91C4 /* GroupedTransactionView.swift */,
 			);
 			path = Transactions;
+			sourceTree = "<group>";
+		};
+		03DEDA2F2C2090EA00FB91C4 /* Deprecated */ = {
+			isa = PBXGroup;
+			children = (
+				03598D682B1638F000739FEF /* ScannerView.swift */,
+				03DEDA0C2C13570700FB91C4 /* CameraView.swift */,
+				03DEDA0E2C13579800FB91C4 /* CamerPreviewView.swift */,
+				03CC81982B1CD353003CD327 /* ListPurchaseLogView.swift */,
+				03F76EC52B21B5790072FE8E /* GroupedProductsView.swift */,
+				03F76EC72B21CD9D0072FE8E /* PurchaseLogView.swift */,
+				03CC819B2B1CD4B4003CD327 /* AddPurchaseLogView.swift */,
+			);
+			path = Deprecated;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

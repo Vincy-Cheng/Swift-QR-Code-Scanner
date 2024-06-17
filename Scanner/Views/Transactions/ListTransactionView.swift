@@ -24,12 +24,6 @@ struct ListTransactionView: View {
                         Text(formattedDate(from: transaction.createdAt!))
                     }
                 }.onDelete(perform: deleteTransaction)
-                
-//                .onDelete(perform: { indexSet in
-//                    let selectedTransaction = indexSet.map { transactions[$0] }
-//                    transactionController.deleteTransaction(context: managedObjectContext, transaction: selectedTransaction.first!)
-//                    fetchTransactions()
-//                })
             }.navigationTitle("Records")
             
             

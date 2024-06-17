@@ -44,7 +44,6 @@
 		03DEDA212C15ECB600FB91C4 /* ListTransactionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03DEDA202C15ECB600FB91C4 /* ListTransactionView.swift */; };
 		03DEDA232C16CE7200FB91C4 /* TransactionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03DEDA222C16CE7200FB91C4 /* TransactionView.swift */; };
 		03DEDA252C189B8300FB91C4 /* GroupedTransactionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03DEDA242C189B8300FB91C4 /* GroupedTransactionView.swift */; };
-		03DEDA292C1B260B00FB91C4 /* TransactionItemController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03DEDA282C1B260B00FB91C4 /* TransactionItemController.swift */; };
 		03DEDA2E2C1B43AC00FB91C4 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 03DEDA2D2C1B43AC00FB91C4 /* Launch Screen.storyboard */; };
 		03F76EC62B21B5790072FE8E /* GroupedProductsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03F76EC52B21B5790072FE8E /* GroupedProductsView.swift */; };
 		03F76EC82B21CD9D0072FE8E /* PurchaseLogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03F76EC72B21CD9D0072FE8E /* PurchaseLogView.swift */; };
@@ -107,7 +106,6 @@
 		03DEDA202C15ECB600FB91C4 /* ListTransactionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListTransactionView.swift; sourceTree = "<group>"; };
 		03DEDA222C16CE7200FB91C4 /* TransactionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionView.swift; sourceTree = "<group>"; };
 		03DEDA242C189B8300FB91C4 /* GroupedTransactionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupedTransactionView.swift; sourceTree = "<group>"; };
-		03DEDA282C1B260B00FB91C4 /* TransactionItemController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TransactionItemController.swift; path = ../../../../../.Trash/TransactionItemController.swift; sourceTree = "<group>"; };
 		03DEDA2C2C1B40DB00FB91C4 /* Calculator-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Calculator-Info.plist"; sourceTree = "<group>"; };
 		03DEDA2D2C1B43AC00FB91C4 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		03F76EC52B21B5790072FE8E /* GroupedProductsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupedProductsView.swift; sourceTree = "<group>"; };
@@ -230,7 +228,6 @@
 				0309155A2C0F79F7009767FA /* OwnerController.swift */,
 				030915602C119768009767FA /* ItemController.swift */,
 				03DEDA1E2C15D4D800FB91C4 /* TransactionController.swift */,
-				03DEDA282C1B260B00FB91C4 /* TransactionItemController.swift */,
 				030915692C120B0A009767FA /* CategoryController.swift */,
 				0309154F2C0F6E0D009767FA /* Container.xcdatamodeld */,
 			);
@@ -432,7 +429,6 @@
 				03DEDA1F2C15D4D800FB91C4 /* TransactionController.swift in Sources */,
 				03DEDA162C14091200FB91C4 /* ListItemView.swift in Sources */,
 				0309156A2C120B0A009767FA /* CategoryController.swift in Sources */,
-				03DEDA292C1B260B00FB91C4 /* TransactionItemController.swift in Sources */,
 				03DEDA1B2C14BAAD00FB91C4 /* CreateTransactionView.swift in Sources */,
 				03F76EC62B21B5790072FE8E /* GroupedProductsView.swift in Sources */,
 				03DEDA212C15ECB600FB91C4 /* ListTransactionView.swift in Sources */,

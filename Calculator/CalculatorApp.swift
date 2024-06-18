@@ -1,6 +1,6 @@
 //
-//  ScannerApp.swift
-//  Scanner
+//  CalculatorApp.swift
+//  Calculator
 //
 //  Created by Wing Lam Cheng on 11/25/23.
 //
@@ -8,7 +8,7 @@
 import SwiftUI
 
 @main
-struct ScannerApp: App {
+struct CalculatorApp: App {
     @StateObject private var dataController = DataController()
 
     var body: some Scene {

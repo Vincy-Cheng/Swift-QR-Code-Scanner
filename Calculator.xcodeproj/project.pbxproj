@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		030915512C0F6E0D009767FA /* Container.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 0309154F2C0F6E0D009767FA /* Container.xcdatamodeld */; };
 		0309155B2C0F79F7009767FA /* OwnerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0309155A2C0F79F7009767FA /* OwnerController.swift */; };
 		0309155D2C0F7A0A009767FA /* PurchaseLogController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0309155C2C0F7A0A009767FA /* PurchaseLogController.swift */; };
 		0309155F2C10BA51009767FA /* EditOwnerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0309155E2C10BA51009767FA /* EditOwnerView.swift */; };
@@ -21,7 +20,7 @@
 		03587D7B2C0E1057000C0B04 /* ListOwnerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03587D7A2C0E1057000C0B04 /* ListOwnerView.swift */; };
 		03598D672B16330000739FEF /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03598D662B16330000739FEF /* Product.swift */; };
 		03598D692B1638F000739FEF /* ScannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03598D682B1638F000739FEF /* ScannerView.swift */; };
-		037C8CBA2B122C7C005F3DF6 /* ScannerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 037C8CB92B122C7C005F3DF6 /* ScannerApp.swift */; };
+		037C8CBA2B122C7C005F3DF6 /* CalculatorApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 037C8CB92B122C7C005F3DF6 /* CalculatorApp.swift */; };
 		037C8CBC2B122C7C005F3DF6 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 037C8CBB2B122C7C005F3DF6 /* ContentView.swift */; };
 		037C8CBE2B122C7D005F3DF6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 037C8CBD2B122C7D005F3DF6 /* Assets.xcassets */; };
 		037C8CC12B122C7D005F3DF6 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 037C8CC02B122C7D005F3DF6 /* Preview Assets.xcassets */; };
@@ -29,6 +28,7 @@
 		037C8CD52B122C7D005F3DF6 /* ScannerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 037C8CD42B122C7D005F3DF6 /* ScannerUITests.swift */; };
 		037C8CD72B122C7D005F3DF6 /* ScannerUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 037C8CD62B122C7D005F3DF6 /* ScannerUITestsLaunchTests.swift */; };
 		037C8D2D2B13C5B1005F3DF6 /* CodeScanner in Frameworks */ = {isa = PBXBuildFile; productRef = 037C8D2C2B13C5B1005F3DF6 /* CodeScanner */; };
+		03BA0D872C21D02A00E29364 /* Container.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 03BA0D852C21D02A00E29364 /* Container.xcdatamodeld */; };
 		03CC81952B1CD0D2003CD327 /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03CC81942B1CD0D2003CD327 /* DataController.swift */; };
 		03CC81992B1CD353003CD327 /* ListPurchaseLogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03CC81982B1CD353003CD327 /* ListPurchaseLogView.swift */; };
 		03CC819C2B1CD4B4003CD327 /* AddPurchaseLogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03CC819B2B1CD4B4003CD327 /* AddPurchaseLogView.swift */; };
@@ -67,7 +67,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		030915502C0F6E0D009767FA /* PurchaseLog.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = PurchaseLog.xcdatamodel; sourceTree = "<group>"; };
 		0309155A2C0F79F7009767FA /* OwnerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OwnerController.swift; sourceTree = "<group>"; };
 		0309155C2C0F7A0A009767FA /* PurchaseLogController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseLogController.swift; sourceTree = "<group>"; };
 		0309155E2C10BA51009767FA /* EditOwnerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditOwnerView.swift; sourceTree = "<group>"; };
@@ -82,7 +81,7 @@
 		03598D662B16330000739FEF /* Product.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Product.swift; sourceTree = "<group>"; };
 		03598D682B1638F000739FEF /* ScannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScannerView.swift; sourceTree = "<group>"; };
 		037C8CB62B122C7C005F3DF6 /* Calculator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Calculator.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		037C8CB92B122C7C005F3DF6 /* ScannerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScannerApp.swift; sourceTree = "<group>"; };
+		037C8CB92B122C7C005F3DF6 /* CalculatorApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorApp.swift; sourceTree = "<group>"; };
 		037C8CBB2B122C7C005F3DF6 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		037C8CBD2B122C7D005F3DF6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		037C8CC02B122C7D005F3DF6 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
@@ -91,6 +90,7 @@
 		037C8CD02B122C7D005F3DF6 /* CalculatorUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CalculatorUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		037C8CD42B122C7D005F3DF6 /* ScannerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScannerUITests.swift; sourceTree = "<group>"; };
 		037C8CD62B122C7D005F3DF6 /* ScannerUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScannerUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		03BA0D862C21D02A00E29364 /* PurchaseLog.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = PurchaseLog.xcdatamodel; sourceTree = "<group>"; };
 		03CC81942B1CD0D2003CD327 /* DataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
 		03CC81982B1CD353003CD327 /* ListPurchaseLogView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListPurchaseLogView.swift; sourceTree = "<group>"; };
 		03CC819B2B1CD4B4003CD327 /* AddPurchaseLogView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPurchaseLogView.swift; sourceTree = "<group>"; };
@@ -164,9 +164,9 @@
 			children = (
 				03DEDA2C2C1B40DB00FB91C4 /* Calculator-Info.plist */,
 				03F76EC92B2217A60072FE8E /* README.md */,
-				037C8CB82B122C7C005F3DF6 /* Scanner */,
-				037C8CC92B122C7D005F3DF6 /* ScannerTests */,
-				037C8CD32B122C7D005F3DF6 /* ScannerUITests */,
+				037C8CB82B122C7C005F3DF6 /* Calculator */,
+				037C8CC92B122C7D005F3DF6 /* CalculatorTests */,
+				037C8CD32B122C7D005F3DF6 /* CalculatorUITests */,
 				037C8CB72B122C7C005F3DF6 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -181,10 +181,10 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		037C8CB82B122C7C005F3DF6 /* Scanner */ = {
+		037C8CB82B122C7C005F3DF6 /* Calculator */ = {
 			isa = PBXGroup;
 			children = (
-				037C8CB92B122C7C005F3DF6 /* ScannerApp.swift */,
+				037C8CB92B122C7C005F3DF6 /* CalculatorApp.swift */,
 				03CC81932B1CD077003CD327 /* DataModel */,
 				03CC819A2B1CD439003CD327 /* Views */,
 				037C8CBD2B122C7D005F3DF6 /* Assets.xcassets */,
@@ -192,7 +192,7 @@
 				037C8CBF2B122C7D005F3DF6 /* Preview Content */,
 				03DEDA2D2C1B43AC00FB91C4 /* Launch Screen.storyboard */,
 			);
-			path = Scanner;
+			path = Calculator;
 			sourceTree = "<group>";
 		};
 		037C8CBF2B122C7D005F3DF6 /* Preview Content */ = {
@@ -203,21 +203,21 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
-		037C8CC92B122C7D005F3DF6 /* ScannerTests */ = {
+		037C8CC92B122C7D005F3DF6 /* CalculatorTests */ = {
 			isa = PBXGroup;
 			children = (
 				037C8CCA2B122C7D005F3DF6 /* ScannerTests.swift */,
 			);
-			path = ScannerTests;
+			path = CalculatorTests;
 			sourceTree = "<group>";
 		};
-		037C8CD32B122C7D005F3DF6 /* ScannerUITests */ = {
+		037C8CD32B122C7D005F3DF6 /* CalculatorUITests */ = {
 			isa = PBXGroup;
 			children = (
 				037C8CD42B122C7D005F3DF6 /* ScannerUITests.swift */,
 				037C8CD62B122C7D005F3DF6 /* ScannerUITestsLaunchTests.swift */,
 			);
-			path = ScannerUITests;
+			path = CalculatorUITests;
 			sourceTree = "<group>";
 		};
 		03CC81932B1CD077003CD327 /* DataModel */ = {
@@ -229,7 +229,7 @@
 				030915602C119768009767FA /* ItemController.swift */,
 				03DEDA1E2C15D4D800FB91C4 /* TransactionController.swift */,
 				030915692C120B0A009767FA /* CategoryController.swift */,
-				0309154F2C0F6E0D009767FA /* Container.xcdatamodeld */,
+				03BA0D852C21D02A00E29364 /* Container.xcdatamodeld */,
 			);
 			path = DataModel;
 			sourceTree = "<group>";
@@ -437,7 +437,6 @@
 				03CC81992B1CD353003CD327 /* ListPurchaseLogView.swift in Sources */,
 				03DEDA122C13668600FB91C4 /* ListCategoryView.swift in Sources */,
 				03DEDA0F2C13579800FB91C4 /* CamerPreviewView.swift in Sources */,
-				030915512C0F6E0D009767FA /* Container.xcdatamodeld in Sources */,
 				03DEDA252C189B8300FB91C4 /* GroupedTransactionView.swift in Sources */,
 				03DEDA0D2C13570700FB91C4 /* CameraView.swift in Sources */,
 				0309155B2C0F79F7009767FA /* OwnerController.swift in Sources */,
@@ -449,13 +448,14 @@
 				030915682C11F111009767FA /* GridItemView.swift in Sources */,
 				03CC819C2B1CD4B4003CD327 /* AddPurchaseLogView.swift in Sources */,
 				03587D6F2C0C4F3D000C0B04 /* HomeView.swift in Sources */,
+				03BA0D872C21D02A00E29364 /* Container.xcdatamodeld in Sources */,
 				030915642C11EC6E009767FA /* CreateItemView.swift in Sources */,
 				030915662C11EE8F009767FA /* CalculateView.swift in Sources */,
 				0309155F2C10BA51009767FA /* EditOwnerView.swift in Sources */,
 				03DEDA182C14297500FB91C4 /* ItemView.swift in Sources */,
 				03DEDA142C1369E900FB91C4 /* EditCategoryView.swift in Sources */,
 				0309155D2C0F7A0A009767FA /* PurchaseLogController.swift in Sources */,
-				037C8CBA2B122C7C005F3DF6 /* ScannerApp.swift in Sources */,
+				037C8CBA2B122C7C005F3DF6 /* CalculatorApp.swift in Sources */,
 				03598D672B16330000739FEF /* Product.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -627,7 +627,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"Scanner/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"Calculator/Preview Content\"";
 				DEVELOPMENT_TEAM = 9W427C9Y7A;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -661,7 +661,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"Scanner/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"Calculator/Preview Content\"";
 				DEVELOPMENT_TEAM = 9W427C9Y7A;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -831,14 +831,14 @@
 /* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
-		0309154F2C0F6E0D009767FA /* Container.xcdatamodeld */ = {
+		03BA0D852C21D02A00E29364 /* Container.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				030915502C0F6E0D009767FA /* PurchaseLog.xcdatamodel */,
+				03BA0D862C21D02A00E29364 /* PurchaseLog.xcdatamodel */,
 			);
-			currentVersion = 030915502C0F6E0D009767FA /* PurchaseLog.xcdatamodel */;
+			currentVersion = 03BA0D862C21D02A00E29364 /* PurchaseLog.xcdatamodel */;
 			name = Container.xcdatamodeld;
-			path = /Users/wincs/Documents/projects/Scanner/Scanner/DataModel/Container.xcdatamodeld;
+			path = /Users/wincs/Documents/projects/Scanner/Calculator/DataModel/Container.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};

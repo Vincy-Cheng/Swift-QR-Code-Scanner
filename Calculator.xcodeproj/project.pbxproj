@@ -295,8 +295,8 @@
 				037C8CB22B122C7C005F3DF6 /* Sources */,
 				037C8CB32B122C7C005F3DF6 /* Frameworks */,
 				037C8CB42B122C7C005F3DF6 /* Resources */,
-				034E877E2C24778B00A4028A /* SwiftLint */,
 				034E87812C247DF500A4028A /* SwiftFormat */,
+				034E877E2C24778B00A4028A /* SwiftLint */,
 			);
 			buildRules = (
 			);

@@ -32,7 +32,7 @@ struct PaymentView: View {
     PaymentMethod(name: "支付寶", color: Color.blue),
     PaymentMethod(name: "FPS", color: Color.green)
   ]
-  @State private var selectedMethod: PaymentMethod? = nil
+  @State private var selectedMethod: PaymentMethod?
   @State private var inputValue: Int = 0
   @State private var isConfirm = false
 

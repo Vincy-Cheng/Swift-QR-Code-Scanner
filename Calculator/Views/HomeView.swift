@@ -91,12 +91,12 @@ struct HomeView: View {
               }
               Button(action: {
                 preInsert()
-              }) {
+              }, label: {
                 Label(
                   title: { Text("Pre-insert items") },
                   icon: { Image(systemName: "cart") }
                 )
-              }
+              })
 
             } label: {
               // Icon for the Menu Button
@@ -131,7 +131,7 @@ struct HomeView: View {
         let owner = OwnerController().preInsertOwner(context: managedObjectContext, name: data.ownerName)
 
         for item in data.items {
-          var category = CategoryController().preInsertCategory(
+          let category = CategoryController().preInsertCategory(
             context: managedObjectContext,
             name: item.categoryName
           )
@@ -145,7 +145,7 @@ struct HomeView: View {
             category: category,
             owner: owner
           )
-          let created = itemController.addItem(context: managedObjectContext, data: itemData)
+          _ = itemController.addItem(context: managedObjectContext, data: itemData)
         }
       }
 

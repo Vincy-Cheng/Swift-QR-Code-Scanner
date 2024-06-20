@@ -27,7 +27,7 @@ struct GridItemView: View {
   // Define the grid layout
   let gridLayout = [
     GridItem(.flexible(), spacing: 10),
-    GridItem(.flexible(), spacing: 10),
+    GridItem(.flexible(), spacing: 10)
   ]
 
   var body: some View {

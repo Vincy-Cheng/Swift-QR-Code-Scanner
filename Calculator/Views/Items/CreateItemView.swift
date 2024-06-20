@@ -297,9 +297,9 @@ struct ItemImageView: View {
       }
       Button(action: {
         isCameraPresented = true
-      }) {
+      }, label: {
         Text("Take Photo").foregroundStyle(.blue)
-      }
+      })
       .padding()
       .foregroundColor(.white)
       .cornerRadius(10)

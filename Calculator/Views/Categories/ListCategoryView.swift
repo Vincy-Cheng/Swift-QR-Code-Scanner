@@ -40,12 +40,12 @@ struct ListCategoryView: View {
                 isShowingAlert = true // Show alert if name is already in use
               }
             }
-          }) {
+          }, label: {
             Image(systemName: "plus")
               .resizable()
               .frame(width: 20, height: 20)
               .padding(.trailing)
-          }.padding(.trailing) // Add trailing padding
+          }).padding(.trailing) // Add trailing padding
         }
         .padding(.bottom) // Add bottom padding
 
@@ -60,10 +60,10 @@ struct ListCategoryView: View {
                 selectedCategory = category // Set the selected owner for editing
                 isPresentingEditView = true
 
-              }) {
+              }, label: {
                 Image(systemName: "info.circle")
                   .foregroundColor(.blue)
-              }.padding(.leading)
+              }).padding(.leading)
             }
           }.onDelete(perform: { indexSet in
             let selected = indexSet.map { categories[$0] }

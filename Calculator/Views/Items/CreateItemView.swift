@@ -107,8 +107,8 @@ struct ItemFormView: View {
   @State private var owners: [Owner] = []
   @State private var isPresentCategoryCreate = false
 
-  @State private var selectedImage: UIImage? = nil
-  @State private var selectedItem: PhotosPickerItem? = nil
+  @State private var selectedImage: UIImage?
+  @State private var selectedItem: PhotosPickerItem?
   @State private var isCameraPresented = false
 
   var body: some View {

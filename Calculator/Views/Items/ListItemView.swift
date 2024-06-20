@@ -42,9 +42,9 @@ struct ListItemView: View {
           ToolbarItem(placement: .navigationBarTrailing) {
             Button(action: {
               isSheetPresented = true
-            }) {
+            }, label: {
               Image(systemName: "plus")
-            }.sheet(isPresented: $isSheetPresented) {
+            }).sheet(isPresented: $isSheetPresented) {
               CreateItemView(isPresented: $isSheetPresented)
             }
           }

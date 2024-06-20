@@ -41,12 +41,12 @@ struct ListOwnerView: View {
                 isShowingAlert = true // Show alert if name is already in use
               }
             }
-          }) {
+          }, label: {
             Image(systemName: "plus")
               .resizable()
               .frame(width: 20, height: 20)
               .padding(.trailing)
-          }.padding(.trailing) // Add trailing padding
+          }).padding(.trailing) // Add trailing padding
         }
         .padding(.bottom) // Add bottom padding
 
@@ -61,10 +61,10 @@ struct ListOwnerView: View {
                 selectedOwner = owner // Set the selected owner for editing
                 isPresentingEditView = true
                 print("edit")
-              }) {
+              }, label: {
                 Image(systemName: "info.circle")
                   .foregroundColor(.blue)
-              }.padding(.leading)
+              }).padding(.leading)
             }
           }.onDelete(perform: { indexSet in
             let selectedUser = indexSet.map { owners[$0] }

@@ -153,17 +153,4 @@ struct GroupedTransactionView: View {
     }
     return groupedItems
   }
-
-  private let dateFormatter: DateFormatter = {
-    let formatter = DateFormatter()
-    formatter.dateStyle = .short
-    formatter.timeStyle = .short
-    return formatter
-  }()
-}
-
-func formattedDate(from date: Date) -> String {
-  let dateFormatter = DateFormatter()
-  dateFormatter.dateFormat = "MMM d, yyyy - HH:mm:ss"
-  return dateFormatter.string(from: date)
 }

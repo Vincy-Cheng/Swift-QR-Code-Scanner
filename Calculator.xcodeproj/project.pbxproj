@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 60;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -16,6 +16,8 @@
 		030915682C11F111009767FA /* GridItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 030915672C11F111009767FA /* GridItemView.swift */; };
 		0309156A2C120B0A009767FA /* CategoryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 030915692C120B0A009767FA /* CategoryController.swift */; };
 		0309156C2C133D8B009767FA /* CreateCategoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0309156B2C133D8B009767FA /* CreateCategoryView.swift */; };
+		034E87842C24847100A4028A /* Formatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 034E87832C24847100A4028A /* Formatter.swift */; };
+		034E87862C24850E00A4028A /* ImageHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 034E87852C24850E00A4028A /* ImageHandler.swift */; };
 		03587D6F2C0C4F3D000C0B04 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03587D6E2C0C4F3D000C0B04 /* HomeView.swift */; };
 		03587D7B2C0E1057000C0B04 /* ListOwnerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03587D7A2C0E1057000C0B04 /* ListOwnerView.swift */; };
 		03598D672B16330000739FEF /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03598D662B16330000739FEF /* Product.swift */; };
@@ -76,6 +78,8 @@
 		030915672C11F111009767FA /* GridItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridItemView.swift; sourceTree = "<group>"; };
 		030915692C120B0A009767FA /* CategoryController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryController.swift; sourceTree = "<group>"; };
 		0309156B2C133D8B009767FA /* CreateCategoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateCategoryView.swift; sourceTree = "<group>"; };
+		034E87832C24847100A4028A /* Formatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Formatter.swift; sourceTree = "<group>"; };
+		034E87852C24850E00A4028A /* ImageHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageHandler.swift; sourceTree = "<group>"; };
 		03587D6E2C0C4F3D000C0B04 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		03587D7A2C0E1057000C0B04 /* ListOwnerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListOwnerView.swift; sourceTree = "<group>"; };
 		03598D662B16330000739FEF /* Product.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Product.swift; sourceTree = "<group>"; };
@@ -150,6 +154,15 @@
 			path = Items;
 			sourceTree = "<group>";
 		};
+		034E87822C24846000A4028A /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				034E87832C24847100A4028A /* Formatter.swift */,
+				034E87852C24850E00A4028A /* ImageHandler.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
 		03587D772C0E1035000C0B04 /* Owners */ = {
 			isa = PBXGroup;
 			children = (
@@ -184,6 +197,7 @@
 		037C8CB82B122C7C005F3DF6 /* Calculator */ = {
 			isa = PBXGroup;
 			children = (
+				034E87822C24846000A4028A /* Utils */,
 				037C8CB92B122C7C005F3DF6 /* CalculatorApp.swift */,
 				03CC81932B1CD077003CD327 /* DataModel */,
 				03CC819A2B1CD439003CD327 /* Views */,
@@ -372,7 +386,7 @@
 				};
 			};
 			buildConfigurationList = 037C8CB12B122C7C005F3DF6 /* Build configuration list for PBXProject "Calculator" */;
-			compatibilityVersion = "Xcode 14.0";
+			compatibilityVersion = "Xcode 15.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -475,6 +489,7 @@
 				03DEDA212C15ECB600FB91C4 /* ListTransactionView.swift in Sources */,
 				030915612C119768009767FA /* ItemController.swift in Sources */,
 				03F76EC82B21CD9D0072FE8E /* PurchaseLogView.swift in Sources */,
+				034E87862C24850E00A4028A /* ImageHandler.swift in Sources */,
 				03CC81992B1CD353003CD327 /* ListPurchaseLogView.swift in Sources */,
 				03DEDA122C13668600FB91C4 /* ListCategoryView.swift in Sources */,
 				03DEDA0F2C13579800FB91C4 /* CamerPreviewView.swift in Sources */,
@@ -493,6 +508,7 @@
 				030915642C11EC6E009767FA /* CreateItemView.swift in Sources */,
 				030915662C11EE8F009767FA /* CalculateView.swift in Sources */,
 				0309155F2C10BA51009767FA /* EditOwnerView.swift in Sources */,
+				034E87842C24847100A4028A /* Formatter.swift in Sources */,
 				03DEDA182C14297500FB91C4 /* ItemView.swift in Sources */,
 				03DEDA142C1369E900FB91C4 /* EditCategoryView.swift in Sources */,
 				0309155D2C0F7A0A009767FA /* PurchaseLogController.swift in Sources */,

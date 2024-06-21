@@ -238,30 +238,3 @@ struct GridItemView: View {
     return count
   }
 }
-
-func loadImageFromRelativePath(relativePath: String) -> UIImage? {
-  // Get the URL for the Documents directory
-  guard let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else {
-    print("Failed to get Documents directory")
-    return nil
-  }
-
-  // Construct the absolute file URL by appending the relative path
-  let fileURL = documentsDirectory.appendingPathComponent(relativePath)
-
-  do {
-    // Read the image data from the file URL
-    let imageData = try Data(contentsOf: fileURL)
-
-    // Create UIImage from the image data
-    if let image = UIImage(data: imageData) {
-      return image
-    } else {
-      print("Failed to create UIImage from image data")
-      return nil
-    }
-  } catch {
-    print("Error loading image: \(error.localizedDescription)")
-    return nil
-  }
-}

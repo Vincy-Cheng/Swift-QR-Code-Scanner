@@ -28,7 +28,7 @@ struct ListItemView: View {
               ForEach(group.items, id: \.self) { item in
                 NavigationLink {
                   // destination view to navigation to
-                  ItemView(item: item, isPresented: $isSheetPresented)
+                  ItemView(isPresented: $isSheetPresented, item: item)
                 } label: {
                   Text(item.name!)
                 }

@@ -31,7 +31,7 @@ struct CreateItemView: View {
     }
   }
 
-  private func createItem(item: ItemData) -> Bool {
+  private func createItem(item: ItemData, selectedImage: UIImage?) -> Bool {
     guard let category = item.category, let owner = item.owner else {
       isAlert = true
       alertContent = "Please fill all the fields"
@@ -47,12 +47,19 @@ struct CreateItemView: View {
       fatalError("Invalid status value")
     }
 
+    let imageURL: String
+    if let selectedImage = selectedImage {
+      imageURL = saveImageToDocumentsDirectory(image: selectedImage) ?? ""
+    } else {
+      imageURL = ""
+    }
+
     let itemData = ItemData(
       name: item.name,
       price: Double(item.price),
       quantity: item.quantity,
       status: status,
-      imageURL: item.imageURL,
+      imageURL: imageURL,
       category: category,
       owner: owner
     )
@@ -66,8 +73,11 @@ struct CreateItemView: View {
       return false
     }
   }
+}
 
-  func test(age1: Int) {}
+enum Mode {
+  case create
+  case edit
 }
 
 struct ItemFormView: View {
@@ -89,7 +99,9 @@ struct ItemFormView: View {
     }
   }
 
-  var callback: (_ item: ItemData) -> Bool
+  var callback: (_ item: ItemData, _ selectedImage: UIImage?) -> Bool
+
+  var deleteItem: (() -> Void)?
 
   @State private var targetItem: ItemData = .init(
     name: "",
@@ -110,6 +122,8 @@ struct ItemFormView: View {
   @State private var selectedImage: UIImage?
   @State private var selectedItem: PhotosPickerItem?
   @State private var isCameraPresented = false
+
+  @State private var isDeleteAlert = false
 
   var body: some View {
     VStack {
@@ -153,66 +167,88 @@ struct ItemFormView: View {
               .padding()
           }
         }
+
+        // Delete item button, only available when mode = edit
+        Button(action: {
+          isAlert = true
+          alertContent = "Confirm to delete?"
+          isDeleteAlert = true
+        }, label: {
+          Text("Delete Item").foregroundStyle(.red)
+        })
       }
+
       ItemImageView(
         selectedImage: $selectedImage,
         selectedItem: $selectedItem,
         isCameraPresented: $isCameraPresented
       )
-
-    }.onTapGesture {
+    }
+    .onTapGesture {
       UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
     }.navigationBarTitle(title)
-      .navigationBarItems(
-        leading: Button("Cancel") {
+    .navigationBarItems(
+      leading: Button("Cancel") {
+        presentationMode.wrappedValue.dismiss()
+      },
+      trailing: Button(buttonLabel) {
+        let result = callback(targetItem, selectedImage)
+
+        
+        if result {
           presentationMode.wrappedValue.dismiss()
-        },
-        trailing: Button(
-          buttonLabel
-        ) {
-          // Save Image
-          targetItem.imageURL = selectedImage.flatMap { saveImageToDocumentsDirectory(image: $0) } ?? ""
-
-          let result = callback(targetItem)
-
-          if result {
-            presentationMode.wrappedValue.dismiss()
-          }
         }
-      )
-      .alert(isPresented: $isAlert) {
+      }
+    )
+    .alert(isPresented: $isAlert) {
+      if isDeleteAlert {
         Alert(
           title: Text("Warning"),
           message: Text(alertContent),
-
+          primaryButton: .destructive(Text("Delete")) {
+            deleteItem!()
+            isAlert = false
+            presentationMode.wrappedValue.dismiss()
+          },
+          secondaryButton: .cancel {
+            isAlert = false
+            isDeleteAlert = false
+          }
+        )
+      } else {
+        Alert(
+          title: Text("Warning"),
+          message: Text(alertContent),
           dismissButton: .cancel(Text("OK")) {
             isAlert = false // Dismiss the alert when OK is tapped
           }
         )
       }
-      .onAppear {
-        categories = CategoryController().findAllCategories(context: managedObjectContext)
+    }
+    .onAppear {
+      categories = CategoryController().findAllCategories(context: managedObjectContext)
 
-        owners = OwnerController().findAllOwners(context: managedObjectContext)
+      owners = OwnerController().findAllOwners(context: managedObjectContext)
 
-        if item != nil {
-          targetItem.name = item!.name!
-          targetItem.price = item!.price
-          targetItem.quantity = Int(item!.quantity)
-          targetItem.status = ItemStatus(rawValue: item!.status!) ?? ItemStatus.available
-          targetItem.category = item!.category
-          targetItem.owner = item!.owner
-        }
-
-        // Set the default category and owner
-        if targetItem.category == nil {
-          targetItem.category = categories.first
-        }
-
-        if targetItem.owner == nil {
-          targetItem.owner = owners.first
-        }
+      if item != nil {
+        targetItem.name = item!.name!
+        targetItem.price = item!.price
+        targetItem.quantity = Int(item!.quantity)
+        targetItem.status = ItemStatus(rawValue: item!.status!) ?? ItemStatus.available
+        targetItem.category = item!.category
+        targetItem.owner = item!.owner
+        selectedImage = loadImageFromRelativePath(relativePath: item!.imageURL ?? "")
       }
+
+      // Set the default category and owner
+      if targetItem.category == nil {
+        targetItem.category = categories.first
+      }
+
+      if targetItem.owner == nil {
+        targetItem.owner = owners.first
+      }
+    }
   }
 
   private var categoryPickerSection: some View {
@@ -288,7 +324,6 @@ struct ItemImageView: View {
   @Binding var selectedImage: UIImage?
   @Binding var selectedItem: PhotosPickerItem?
   @Binding var isCameraPresented: Bool
-  @State private var isImageChange = false
 
   var body: some View {
     HStack {
@@ -304,7 +339,7 @@ struct ItemImageView: View {
       .foregroundColor(.white)
       .cornerRadius(10)
       .sheet(isPresented: $isCameraPresented) {
-        CameraView(selectedImage: $selectedImage, isPresented: $isCameraPresented, isCaptured: $isImageChange)
+        CameraView(selectedImage: $selectedImage, isPresented: $isCameraPresented)
       }
     }.onChange(of: selectedItem) {
       _ in
@@ -321,36 +356,4 @@ struct ItemImageView: View {
       }
     }
   }
-}
-
-func formatter() -> NumberFormatter {
-  let formatter = NumberFormatter()
-  formatter.numberStyle = .decimal
-  return formatter
-}
-
-func saveImageToDocumentsDirectory(image: UIImage) -> String? {
-  let filename = UUID().uuidString + ".jpg"
-  guard let imageData = image.jpegData(compressionQuality: 1.0) else {
-    print("Failed to convert UIImage to Data")
-    return nil
-  }
-  guard let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else {
-    print("Failed to get Documents directory")
-    return nil
-  }
-  let fileURL = documentsDirectory.appendingPathComponent(filename)
-  do {
-    try imageData.write(to: fileURL)
-    print("Photo saved to: \(fileURL)")
-    return fileURL.lastPathComponent
-  } catch {
-    print("Error saving photo: \(error.localizedDescription)")
-    return nil
-  }
-}
-
-enum Mode {
-  case create
-  case edit
 }

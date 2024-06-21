@@ -11,7 +11,6 @@ import SwiftUI
 struct CameraView: View {
   @Binding var selectedImage: UIImage?
   @Binding var isPresented: Bool
-  @Binding var isCaptured: Bool
 
   @StateObject private var cameraModel = CameraModel()
 
@@ -47,7 +46,6 @@ struct CameraView: View {
     .onChange(of: cameraModel.capturedPhoto) { newValue in
       if let newValue = newValue {
         selectedImage = newValue
-        isCaptured = true
         isPresented = false
       }
     }

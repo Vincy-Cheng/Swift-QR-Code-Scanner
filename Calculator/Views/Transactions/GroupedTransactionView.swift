@@ -45,6 +45,7 @@ struct GroupedTransactionView: View {
             _ in
             fetchTransactions()
           }
+          .tint(primaryColor)
           .pickerStyle(.menu)
           .padding(.trailing)
 
@@ -53,6 +54,7 @@ struct GroupedTransactionView: View {
               Text($0)
             }
           }
+          .tint(primaryColor)
           .pickerStyle(.menu)
           .padding(.trailing)
         }

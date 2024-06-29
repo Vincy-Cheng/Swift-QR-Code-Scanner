@@ -58,7 +58,7 @@ struct GridItemView: View {
               Text(owner.name ?? "").tag(owner.name ?? "")
             }
           }
-          .foregroundStyle(primaryColor)
+          .tint(primaryColor)
           .pickerStyle(.menu)
         }
         HStack {
@@ -69,7 +69,7 @@ struct GridItemView: View {
               Text(category.name ?? "").tag(category.name ?? "")
             }
           }
-          .foregroundStyle(primaryColor)
+          .tint(primaryColor)
           .pickerStyle(.menu)
         }
       }

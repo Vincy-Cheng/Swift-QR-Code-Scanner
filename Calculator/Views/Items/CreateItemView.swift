@@ -146,6 +146,7 @@ struct ItemFormView: View {
               Text($0.rawValue).tag($0 as ItemStatus)
             }
           }
+          .tint(primaryColor)
           .pickerStyle(.menu)
         }
 
@@ -258,6 +259,7 @@ struct ItemFormView: View {
         isPresentCategoryCreate = true
       }
       .font(.caption)
+      .foregroundStyle(primaryColor)
       .sheet(isPresented: $isPresentCategoryCreate, onDismiss: {
         categories = CategoryController().findAllCategories(context: managedObjectContext)
       }) {
@@ -273,6 +275,7 @@ struct ItemFormView: View {
           }
         }
       }
+      .tint(primaryColor)
       .pickerStyle(.menu)
     }
   }
@@ -288,6 +291,7 @@ struct ItemFormView: View {
           }
         }
       }
+      .tint(primaryColor)
       .pickerStyle(.menu)
     }
   }

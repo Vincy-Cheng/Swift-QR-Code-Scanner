@@ -18,7 +18,10 @@ struct GroupedTransactionView: View {
   @StateObject private var transactionController = TransactionController()
   @State private var transactions: [Transaction] = []
   @State private var groupingMethod: String = ""
-  let options = ["date", "all"]
+  let options = ["all", "date"]
+  @State private var sumUpMethod: String = ""
+
+  let sumUpOptions = ["owner", "payment"]
 
   @State private var groupedTransactionItems: [String: [TransactionItemGroup]] = [:]
 
@@ -44,6 +47,14 @@ struct GroupedTransactionView: View {
           }
           .pickerStyle(.menu)
           .padding(.trailing)
+
+          Picker("Select the payment method", selection: $sumUpMethod) {
+            ForEach(sumUpOptions, id: \.self) {
+              Text($0)
+            }
+          }
+          .pickerStyle(.menu)
+          .padding(.trailing)
         }
         if groupingMethod == "date" {
           datePicker
@@ -51,30 +62,10 @@ struct GroupedTransactionView: View {
         }
 
         ScrollView {
-          ForEach(groupedTransactionItems.keys.sorted(), id: \.self) { ownerName in
-            VStack {
-              HStack {
-                Text(ownerName).font(.title)
-                Spacer()
-              }.padding(.bottom)
-
-              ForEach(groupedTransactionItems[ownerName] ?? [], id: \.name) { itemGroup in
-                HStack {
-                  Text("x\(itemGroup.quantity)  \(itemGroup.name)")
-
-                  Spacer()
-
-                  Text("$\(Int(itemGroup.price))")
-                }
-              }
-              DashedLineView()
-              HStack {
-                Spacer()
-                Text("Total: $\(calculateTotal(for: ownerName))")
-                  .fontWeight(.bold)
-              }
-              Divider()
-            }
+          if sumUpMethod == "owner" {
+            groupByOwner
+          } else {
+            groupByPayment
           }
         }.padding()
       }
@@ -90,10 +81,47 @@ struct GroupedTransactionView: View {
       }
   }
 
-  private func calculateTotal(for ownerName: String) -> Int {
-    let items = groupedTransactionItems[ownerName] ?? []
-    let total = items.reduce(0) { $0 + Int($1.price) }
-    return total
+  private var groupByPayment: some View {
+    let paymentSums = sumByPaymentMethod(transactions: transactions)
+    return ForEach(Array(paymentSums.keys), id: \.self) { paymentMethod in
+      if let totalPaid = paymentSums[paymentMethod] {
+        HStack {
+          Text(paymentMethod)
+          Spacer()
+          Text("Total: $\(totalPaid, specifier: "%.2f")")
+        }
+      }
+    }
+  }
+
+  private var groupByOwner: some View {
+    return ForEach(groupedTransactionItems.keys.sorted(), id: \.self) { ownerName in
+      VStack {
+        HStack {
+          Text(ownerName).font(.title)
+          Spacer()
+        }.padding(.bottom)
+
+        ForEach(groupedTransactionItems[ownerName] ?? [], id: \.name) { itemGroup in
+          HStack {
+            Text("x\(itemGroup.quantity)  \(itemGroup.name)")
+
+            Spacer()
+
+            Text("$\(Int(itemGroup.price))")
+          }
+        }
+
+        DashedLineView()
+
+        HStack {
+          Spacer()
+          Text("Total: $\(calculateTotal(for: ownerName))")
+            .fontWeight(.bold)
+        }
+        Divider()
+      }
+    }
   }
 
   private var datePicker: some View {
@@ -111,6 +139,12 @@ struct GroupedTransactionView: View {
     .labelsHidden() // Hide labels if you only want the picker
   }
 
+  private func calculateTotal(for ownerName: String) -> Int {
+    let items = groupedTransactionItems[ownerName] ?? []
+    let total = items.reduce(0) { $0 + Int($1.price) }
+    return total
+  }
+
   private func fetchTransactions() {
     let transaction = transactionController.findAllTransaction(
       context: managedObjectContext,
@@ -119,6 +153,9 @@ struct GroupedTransactionView: View {
     )
     transactions = transaction
     groupedTransactionItems = groupTransactionsByOwner(transactions: transactions)
+
+    print(Dictionary(grouping: transactions) { $0.payment })
+    // paid, transactionItems
   }
 
   private func groupTransactionsByOwner(transactions: [Transaction]) -> [String: [TransactionItemGroup]] {
@@ -152,5 +189,27 @@ struct GroupedTransactionView: View {
       }
     }
     return groupedItems
+  }
+
+  private func sumByPaymentMethod(transactions: [Transaction]) -> [String: Double] {
+    var paymentSums: [String: Double] = [:]
+
+    for transaction in transactions {
+      let paymentMethod = transaction.payment
+      guard let transactionItems = transaction.transactionItems?.allObjects as? [TransactionItem]
+      else { continue }
+
+      for item in transactionItems {
+        let itemTotal = item.price * Double(item.quantity)
+
+        if let currentSum = paymentSums[paymentMethod!] {
+          paymentSums[paymentMethod!] = currentSum + itemTotal
+        } else {
+          paymentSums[paymentMethod!] = itemTotal
+        }
+      }
+    }
+
+    return paymentSums
   }
 }

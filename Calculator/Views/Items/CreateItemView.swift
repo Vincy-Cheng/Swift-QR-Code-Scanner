@@ -194,7 +194,6 @@ struct ItemFormView: View {
       trailing: Button(buttonLabel) {
         let result = callback(targetItem, selectedImage)
 
-        
         if result {
           presentationMode.wrappedValue.dismiss()
         }

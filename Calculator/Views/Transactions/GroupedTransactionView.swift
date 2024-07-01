@@ -17,9 +17,9 @@ struct GroupedTransactionView: View {
   @Environment(\.managedObjectContext) var managedObjectContext
   @StateObject private var transactionController = TransactionController()
   @State private var transactions: [Transaction] = []
-  @State private var groupingMethod: String = ""
+  @State private var groupingMethod: String = "all"
   let options = ["all", "date"]
-  @State private var sumUpMethod: String = ""
+  @State private var sumUpMethod: String = "owner"
 
   let sumUpOptions = ["owner", "payment"]
 
@@ -70,6 +70,11 @@ struct GroupedTransactionView: View {
             groupByPayment
           }
         }.padding()
+          .foregroundStyle(.black)
+          .background(
+            Image("Receipt")
+              .resizable()
+          )
       }
 
     }.frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)

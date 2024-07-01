@@ -93,7 +93,7 @@ struct GridItemView: View {
                 Image(uiImage: uiImage!)
                   .resizable()
                   .scaledToFill()
-                  .frame(width: geometry.size.width / 3, height: geometry.size.width / 3)
+                  .frame(width: geometry.size.width / 2.5, height: geometry.size.width / 2.5)
                   .clipped()
                   .cornerRadius(20)
                   .padding(10)
@@ -103,7 +103,7 @@ struct GridItemView: View {
                 Image("Image-Not-Found")
                   .resizable()
                   .scaledToFill()
-                  .frame(width: geometry.size.width / 3, height: geometry.size.width / 3)
+                  .frame(width: geometry.size.width / 2.5, height: geometry.size.width / 2.5)
                   .clipped()
                   .cornerRadius(20)
                   .saturation(item.quantity <= 0 ? 0 : 1)
@@ -116,14 +116,14 @@ struct GridItemView: View {
                   .font(.system(size: 18)) // Adjust font size as needed
                   .fontWeight(.bold)
                   .padding(.top, 20)
-                  .frame(maxWidth: geometry.size.width / 3)
+                  .frame(maxWidth: geometry.size.width / 2.5)
                 Spacer()
 
                 Text("$\(Int(item.price))")
                   .foregroundColor(uiImage == nil ? primaryColor : Color.white)
                   .font(.system(size: 18)) // Adjust font size as needed
                   .fontWeight(.bold)
-                  .frame(maxWidth: geometry.size.width / 3)
+                  .frame(maxWidth: geometry.size.width / 2.5)
                 HStack {
                   Button(action: {
                     // Minus action
@@ -137,7 +137,6 @@ struct GridItemView: View {
                       .foregroundColor(primaryColor)
                       .font(.system(size: 28))
                   }
-                  .padding([.leading], 20) // Adjust the trailing padding
                   .disabled(item.quantity <= 0)
 
                   Spacer()
@@ -148,7 +147,6 @@ struct GridItemView: View {
                     .foregroundColor(.white)
                     .font(.system(size: 18)) // Adjust font size as needed
                     .fontWeight(.bold)
-                    .padding([.bottom], 10)
                   } else {
                     Text(String(
                       countItem(targetItem: item)
@@ -156,7 +154,6 @@ struct GridItemView: View {
                     .foregroundColor(.black)
                     .font(.system(size: 18)) // Adjust font size as needed
                     .fontWeight(.bold)
-                    .padding([.bottom], 10)
                   }
 
                   Spacer()
@@ -171,11 +168,11 @@ struct GridItemView: View {
                       .foregroundColor(primaryColor)
                       .font(.system(size: 28))
                   }
-                  .padding([.trailing], 20)
                   .disabled(item.quantity <= 0)
                 }
-                .padding(.bottom, 20)
+                .padding([.horizontal, .bottom])
               }
+              .padding()
             }
           }
 
@@ -186,7 +183,7 @@ struct GridItemView: View {
             Image(systemName: "plus")
               .foregroundColor(primaryColor)
               .font(.system(size: 48))
-              .frame(width: geometry.size.width / 3, height: geometry.size.width / 3)
+              .frame(width: geometry.size.width / 2.5, height: geometry.size.width / 2.5)
               .background(Color.white)
               .cornerRadius(20)
 
@@ -195,9 +192,9 @@ struct GridItemView: View {
           }) {
             // The content of the sheet goes here
             CreateItemView(isPresented: $isSheetPresented)
-          }.padding(10)
+          }.padding()
         }
-        .padding(.bottom, 20)
+        .padding(.bottom)
 
       }.onAppear {
         fetchItem()

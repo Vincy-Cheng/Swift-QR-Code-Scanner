@@ -26,14 +26,14 @@ struct ListTransactionView: View {
       }.navigationTitle("Records")
 
       HStack(alignment: .lastTextBaseline) {
-        Text("Daily Record").foregroundColor(primaryColor).font(.title)
+        Text("Daily Record").foregroundColor(Color.mark).font(.title)
         Spacer()
         NavigationLink {
           GroupedTransactionView()
         } label: {
           Label(
-            title: { Text("Next").foregroundColor(primaryColor) },
-            icon: { Image(systemName: "chevron.right.2").foregroundColor(primaryColor) }
+            title: { Text("Next").foregroundColor(Color.mark) },
+            icon: { Image(systemName: "chevron.right.2").foregroundColor(Color.mark) }
           )
         }
       }.padding()

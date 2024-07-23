@@ -58,7 +58,7 @@ struct GridItemView: View {
               Text(owner.name ?? "").tag(owner.name ?? "")
             }
           }
-          .tint(primaryColor)
+          .tint(Color.mark)
           .pickerStyle(.menu)
         }
         HStack {
@@ -69,7 +69,7 @@ struct GridItemView: View {
               Text(category.name ?? "").tag(category.name ?? "")
             }
           }
-          .tint(primaryColor)
+          .tint(Color.mark)
           .pickerStyle(.menu)
         }
       }
@@ -112,7 +112,7 @@ struct GridItemView: View {
 
               VStack {
                 Text(item.name!)
-                  .foregroundColor(uiImage == nil ? primaryColor : Color.white)
+                  .foregroundColor(uiImage == nil ? Color.mark : Color.white)
                   .font(.system(size: 18)) // Adjust font size as needed
                   .fontWeight(.bold)
                   .padding(.top, 20)
@@ -120,7 +120,7 @@ struct GridItemView: View {
                 Spacer()
 
                 Text("$\(Int(item.price))")
-                  .foregroundColor(uiImage == nil ? primaryColor : Color.white)
+                  .foregroundColor(uiImage == nil ? Color.mark : Color.white)
                   .font(.system(size: 18)) // Adjust font size as needed
                   .fontWeight(.bold)
                   .frame(maxWidth: geometry.size.width / 2.5)
@@ -134,7 +134,7 @@ struct GridItemView: View {
 
                   }) {
                     Image(systemName: "minus.circle.fill")
-                      .foregroundColor(primaryColor)
+                      .foregroundColor(Color.mark)
                       .font(.system(size: 28))
                   }
                   .disabled(item.quantity <= 0)
@@ -165,7 +165,7 @@ struct GridItemView: View {
 
                   }) {
                     Image(systemName: "plus.circle.fill")
-                      .foregroundColor(primaryColor)
+                      .foregroundColor(Color.mark)
                       .font(.system(size: 28))
                   }
                   .disabled(item.quantity <= 0)
@@ -181,7 +181,7 @@ struct GridItemView: View {
             isSheetPresented = true
           }) {
             Image(systemName: "plus")
-              .foregroundColor(primaryColor)
+              .foregroundColor(Color.mark)
               .font(.system(size: 48))
               .frame(width: geometry.size.width / 2.5, height: geometry.size.width / 2.5)
               .background(Color.white)

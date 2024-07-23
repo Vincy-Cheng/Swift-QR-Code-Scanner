@@ -44,11 +44,11 @@ struct CalculateView: View {
           } label: {
             HStack {
               if isValid {
-                Text("Next").font(.title).foregroundStyle(primaryColor)
+                Text("Next").font(.title).foregroundStyle(Color.mark)
                 Image(systemName: "chevron.right.2")
                   .resizable()
                   .frame(width: 24, height: 24)
-                  .foregroundColor(primaryColor)
+                  .foregroundColor(Color.mark)
               } else {
                 Text("Next").font(.title).foregroundStyle(.gray)
                 Image(systemName: "chevron.right.2")

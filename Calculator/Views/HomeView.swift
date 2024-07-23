@@ -8,7 +8,7 @@
 import CoreData
 import SwiftUI
 
-let primaryColor: Color = .init(uiColor: UIColor(red: 120 / 255, green: 108 / 255, blue: 255 / 255, alpha: 1))
+// let Color.mark: Color = .init(uiColor: UIColor(red: 120 / 255, green: 108 / 255, blue: 255 / 255, alpha: 1))
 
 struct HomeView: View {
   @State private var selectedItems: [Item] = []
@@ -103,7 +103,7 @@ struct HomeView: View {
               Image(systemName: "list.bullet")
                 .resizable()
                 .frame(width: 24, height: 24)
-                .foregroundColor(primaryColor)
+                .foregroundColor(Color.mark)
             }
           }
         }

@@ -33,7 +33,7 @@ struct GroupedTransactionView: View {
         HStack(alignment: .lastTextBaseline) {
           Text("Records")
             .font(.title)
-            .foregroundStyle(primaryColor)
+            .foregroundStyle(Color.mark)
             .padding()
 
           Picker("Select the grouping method", selection: $groupingMethod) {
@@ -45,7 +45,7 @@ struct GroupedTransactionView: View {
             _ in
             fetchTransactions()
           }
-          .tint(primaryColor)
+          .tint(Color.mark)
           .pickerStyle(.menu)
           .padding(.trailing)
 
@@ -54,7 +54,7 @@ struct GroupedTransactionView: View {
               Text($0)
             }
           }
-          .tint(primaryColor)
+          .tint(Color.mark)
           .pickerStyle(.menu)
           .padding(.trailing)
         }

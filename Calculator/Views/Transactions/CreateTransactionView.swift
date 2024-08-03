@@ -23,7 +23,7 @@ struct CreateTransactionView: View {
             .clipShape(RoundedCornersShape(corners: [.bottomLeft, .bottomRight], radius: 25))
             .shadow(color: Color.black.opacity(0.3), radius: 10, x: 0, y: 5)
           }
-          .background(Color(uiColor: UIColor(red: 173 / 255, green: 194 / 255, blue: 223 / 255, alpha: 1)))
+          .background(Color.markBG2)
           .frame(width: geometry.size.width, height: geometry.size.height * 1 / 2, alignment: .topLeading)
           .clipShape(RoundedCornersShape(corners: [.bottomLeft, .bottomRight], radius: 25))
           .shadow(color: Color.black.opacity(0.3), radius: 10, x: 0, y: 5)
@@ -44,7 +44,7 @@ struct CreateTransactionView: View {
         )
       }
       .toolbarBackground(
-        Color(uiColor: UIColor(red: 173 / 255, green: 194 / 255, blue: 223 / 255, alpha: 1)),
+        Color.markBG2,
         for: .navigationBar
       )
       .toolbarBackground(.visible, for: .navigationBar)

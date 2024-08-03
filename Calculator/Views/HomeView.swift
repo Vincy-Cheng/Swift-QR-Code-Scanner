@@ -8,8 +8,6 @@
 import CoreData
 import SwiftUI
 
-// let Color.mark: Color = .init(uiColor: UIColor(red: 120 / 255, green: 108 / 255, blue: 255 / 255, alpha: 1))
-
 struct HomeView: View {
   @State private var selectedItems: [Item] = []
   @State private var needsRefresh: Bool = false
@@ -51,7 +49,7 @@ struct HomeView: View {
               .font(.title)
               .foregroundColor(.primary)
           }
-          ToolbarItem(placement: .navigationBarTrailing) {
+          ToolbarItem(placement: .topBarTrailing) {
             Menu {
               NavigationLink {
                 ListOwnerView()
@@ -108,7 +106,7 @@ struct HomeView: View {
           }
         }
         .toolbarBackground(
-          Color(uiColor: UIColor(red: 173 / 255, green: 194 / 255, blue: 223 / 255, alpha: 1)),
+          Color.markBG2,
           for: .navigationBar
         )
         .toolbarBackground(.visible, for: .navigationBar)
@@ -124,6 +122,7 @@ struct HomeView: View {
     }
   }
 
+  // To be deleted
   private func preInsert() {
     let inital = OwnerController().findAllOwners(context: managedObjectContext)
     if inital.isEmpty {
@@ -151,6 +150,31 @@ struct HomeView: View {
 
       needsRefresh.toggle()
     }
+
+//    for data in preInsertItems {
+//      // let owner = OwnerController().preInsertOwner(context: managedObjectContext, name: data.ownerName)
+//      let owner = OwnerController().findOwnerByName(context: managedObjectContext, name: data.ownerName)
+//
+//      for item in data.items {
+//        let category = CategoryController().preInsertCategory(
+//          context: managedObjectContext,
+//          name: item.categoryName
+//        )
+//
+//        let itemData = ItemData(
+//          name: item.name,
+//          price: item.price,
+//          quantity: item.quantity,
+//          status: ItemStatus.available,
+//          imageURL: "",
+//          category: category,
+//          owner: owner
+//        )
+//        _ = itemController.addItem(context: managedObjectContext, data: itemData)
+//      }
+//    }
+//
+//    needsRefresh.toggle()
   }
 }
 
@@ -414,4 +438,129 @@ let preInsertData = [
       ),
     ]
   )
+]
+
+let preInsertItems = [
+  PerInsertData(
+    ownerName: "Chow",
+    items: [
+      PerInsertItemData(
+        name: "Holo 5人大立牌",
+        price: 80,
+        quantity: 40,
+        categoryName: "Hololive"
+      ),
+      PerInsertItemData(
+        name: "Summer Set",
+        price: 100,
+        quantity: 52,
+        categoryName: "Hololive"
+      ),
+      PerInsertItemData(
+        name: "迷宮飯木碟",
+        price: 80,
+        quantity: 30,
+        categoryName: "迷宮飯"
+      ),
+      PerInsertItemData(
+        name: "新迷宮立牌",
+        price: 85,
+        quantity: 70,
+        categoryName: "迷宮飯"
+      ),
+    ]
+  ),
+  PerInsertData(
+    ownerName: "y",
+    items: [
+      PerInsertItemData(
+        name: "王淚透卡塔羅set",
+        price: 100,
+        quantity: 200,
+        categoryName: "Zelda"
+      ),
+      PerInsertItemData(
+        name: "王淚貼紙set",
+        price: 30,
+        quantity: 200,
+        categoryName: "Zelda"
+      ),
+      PerInsertItemData(
+        name: "王淚公主飯友",
+        price: 20,
+        quantity: 200,
+        categoryName: "Zelda"
+      ),
+      PerInsertItemData(
+        name: "Splat 水母搖搖",
+        price: 15,
+        quantity: 200,
+        categoryName: "Splatoon"
+      ),
+      PerInsertItemData(
+        name: "Splat 3明信片+海報+貼紙+小卡 set",
+        price: 60,
+        quantity: 200,
+        categoryName: "Splatoon"
+      ),
+    ]
+  ),
+  PerInsertData(
+    ownerName: "Ge",
+    items: [
+      PerInsertItemData(
+        name: "天童アリス 立牌",
+        price: 60,
+        quantity: 200,
+        categoryName: "BA"
+      ),
+      PerInsertItemData(
+        name: "聖園ミカ 壓克力色紙",
+        price: 50,
+        quantity: 200,
+        categoryName: "BA"
+      ),
+      PerInsertItemData(
+        name: "聖園ミカ 掛件",
+        price: 35,
+        quantity: 200,
+        categoryName: "BA"
+      ),
+      PerInsertItemData(
+        name: "聖園ミカ set",
+        price: 70,
+        quantity: 200,
+        categoryName: "BA"
+      ),
+    ]
+  ),
+  PerInsertData(
+    ownerName: "Wmc",
+    items: [
+      PerInsertItemData(
+        name: "透明魷魚掛",
+        price: 60,
+        quantity: 160,
+        categoryName: "Splatoon"
+      ),
+      PerInsertItemData(
+        name: "Locker",
+        price: 120,
+        quantity: 200,
+        categoryName: "Splatoon"
+      ),
+      PerInsertItemData(
+        name: "夏日雪條",
+        price: 30,
+        quantity: 200,
+        categoryName: "Splatoon"
+      ),
+      PerInsertItemData(
+        name: "偶像串串 set",
+        price: 80,
+        quantity: 200,
+        categoryName: "Splatoon"
+      ),
+    ]
+  ),
 ]

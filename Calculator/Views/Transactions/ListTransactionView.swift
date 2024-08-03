@@ -23,31 +23,30 @@ struct ListTransactionView: View {
             Text(formattedDate(from: transaction.createdAt!))
           }
         }.onDelete(perform: deleteTransaction)
-      }.navigationTitle("Records")
-
-      HStack(alignment: .lastTextBaseline) {
-        Text("Daily Record").foregroundColor(Color.mark).font(.title)
-        Spacer()
+      }.navigationTitle(Text("Records").foregroundColor(Color.mark))
+    }.onAppear {
+      fetchTransactions()
+    }.toolbar {
+      ToolbarItem(placement: .topBarTrailing) {
         NavigationLink {
           GroupedTransactionView()
         } label: {
-          Label(
-            title: { Text("Next").foregroundColor(Color.mark) },
-            icon: { Image(systemName: "chevron.right.2").foregroundColor(Color.mark) }
+          HStack(alignment: .center) {
+            Text("Next")
+            Image(systemName: "chevron.right.2")
+          }.foregroundColor(
+            Color.mark
           )
         }
-      }.padding()
-        .frame(alignment: .bottom)
-
-    }.onAppear {
-      fetchTransactions()
+      }
     }
   }
 
   private func fetchTransactions() {
     let transaction = transactionController.findAllTransaction(
       context: managedObjectContext,
-      date: Date(),
+      startDate: Date(),
+      endDate: Date(),
       groupingMethod: "all"
     )
     transactions = transaction

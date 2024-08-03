@@ -42,7 +42,7 @@ struct GridItemView: View {
         }.padding(.vertical, 5)
 
       scrollView
-    }.background(Color(uiColor: UIColor(red: 173 / 255, green: 194 / 255, blue: 223 / 255, alpha: 1)))
+    }.background(Color.markBG2)
   }
 
   private var filterView: some View {

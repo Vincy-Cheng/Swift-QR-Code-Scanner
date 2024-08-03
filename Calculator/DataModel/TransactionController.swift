@@ -40,7 +40,12 @@ class TransactionController: DataController {
     return true
   }
 
-  func findAllTransaction(context: NSManagedObjectContext, date: Date, groupingMethod: String) -> [Transaction] {
+  func findAllTransaction(
+    context: NSManagedObjectContext,
+    startDate: Date,
+    endDate: Date,
+    groupingMethod: String
+  ) -> [Transaction] {
     let request: NSFetchRequest<Transaction> = Transaction.fetchRequest()
     let sortDescriptor = NSSortDescriptor(key: "createdAt", ascending: true)
 
@@ -51,14 +56,14 @@ class TransactionController: DataController {
     var predicates: [NSPredicate] = []
 
     if groupingMethod != "all" {
-      let calendar = Calendar.current
-      let startOfDay = calendar.startOfDay(for: date)
-      let endOfDay = calendar.date(byAdding: .day, value: 1, to: startOfDay)?.addingTimeInterval(-1)
+      var calendar = Calendar.current
+      calendar.timeZone = NSTimeZone.local
+      let dateAtEndOfDay = calendar.date(bySettingHour: 23, minute: 59, second: 59, of: endDate) ?? endDate
 
       predicates.append(NSPredicate(
         format: "createdAt >= %@ AND createdAt <= %@",
-        startOfDay as NSDate,
-        endOfDay! as NSDate
+        startDate as NSDate,
+        dateAtEndOfDay as NSDate
       ))
     }
 

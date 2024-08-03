@@ -104,6 +104,10 @@ struct PaymentView: View {
           Button(action: {
             if selectedMethod?.id != option.id {
               selectedMethod = option // Select this method
+              // Set the sum up if not "Cash"
+              if selectedMethod?.name != "Cash" {
+                inputValue = sumUp(groupedItems: groupItems(selectedItems: selectedItems))
+              }
             }
           }) {
             Text(option.name)
@@ -120,7 +124,18 @@ struct PaymentView: View {
           .clipShape(RoundedCornersShape(corners: [.topRight, .bottomRight], radius: 25))
 
           // Text field hidden by default, only shown when selectedMethod == option
-          if selectedMethod?.id == option.id {
+//          if selectedMethod?.id == option.id {
+//            TextField("Enter value", value: $inputValue, formatter: formatter())
+//              .keyboardType(.numberPad)
+//              .foregroundColor(.gray)
+//              .background(paymentFontColor)
+//              .clipShape(RoundedCornersShape(corners: [.topRight, .bottomRight], radius: 25))
+//              .frame(width: 32, alignment: .leading)
+//              .transition(.opacity)
+//              .padding()
+//          }
+
+          if selectedMethod?.id == option.id && selectedMethod?.name == "Cash" {
             TextField("Enter value", value: $inputValue, formatter: formatter())
               .keyboardType(.numberPad)
               .foregroundColor(.gray)

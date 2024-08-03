@@ -36,6 +36,19 @@ class OwnerController: DataController {
     return owner // Owner added successfully
   }
 
+  func findOwnerByName(context: NSManagedObjectContext, name: String) -> Owner? {
+    let request: NSFetchRequest<Owner> = Owner.fetchRequest()
+    request.predicate = NSPredicate(format: "name == %@", name)
+
+    do {
+      let owners = try context.fetch(request)
+      return owners.first
+    } catch {
+      print("Failed to fetch owner by name: \(error.localizedDescription)")
+      return nil
+    }
+  }
+
   func findAllOwners(context: NSManagedObjectContext) -> [Owner] {
     let request: NSFetchRequest<Owner> = Owner.fetchRequest()
     let sortDescriptor = NSSortDescriptor(key: "name", ascending: true)

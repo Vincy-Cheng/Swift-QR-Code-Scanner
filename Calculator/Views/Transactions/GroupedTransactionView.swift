@@ -25,17 +25,13 @@ struct GroupedTransactionView: View {
 
   @State private var groupedTransactionItems: [String: [TransactionItemGroup]] = [:]
 
-  @State private var selectedDate = Date()
+  @State private var startDate = Date()
+  @State private var endDate = Date()
 
   var body: some View {
     VStack(alignment: .leading) {
       VStack(alignment: .leading) {
         HStack(alignment: .lastTextBaseline) {
-          Text("Records")
-            .font(.title)
-            .foregroundStyle(Color.mark)
-            .padding()
-
           Picker("Select the grouping method", selection: $groupingMethod) {
             ForEach(options, id: \.self) {
               Text($0)
@@ -59,7 +55,7 @@ struct GroupedTransactionView: View {
           .padding(.trailing)
         }
         if groupingMethod == "date" {
-          datePicker
+          dateRangePicker
             .padding(.horizontal)
         }
 
@@ -72,7 +68,7 @@ struct GroupedTransactionView: View {
         }.padding()
           .foregroundStyle(.black)
           .background(
-            Image("Receipt")
+            transactions.isEmpty ? nil : Image("Receipt")
               .resizable()
           )
       }
@@ -131,19 +127,33 @@ struct GroupedTransactionView: View {
     }
   }
 
-  private var datePicker: some View {
-    return DatePicker(
-      "Select a date",
-      selection: $selectedDate,
-      in: ...Date.now,
-      displayedComponents: .date
-    )
-    .onChange(of: selectedDate) {
-      _ in
-      fetchTransactions()
+  private var dateRangePicker: some View {
+    return HStack {
+      DatePicker(
+        "Select the start date",
+        selection: $startDate,
+        in: ...endDate,
+        displayedComponents: .date
+      )
+      .onChange(of: startDate) {
+        _ in
+        fetchTransactions()
+      }
+      .datePickerStyle(CompactDatePickerStyle()) // Adjust style as needed
+      .labelsHidden() // Hide labels if you only want the picker
+      DatePicker(
+        "Select the end date",
+        selection: $endDate,
+        in: startDate...,
+        displayedComponents: .date
+      )
+      .onChange(of: endDate) {
+        _ in
+        fetchTransactions()
+      }
+      .datePickerStyle(CompactDatePickerStyle()) // Adjust style as needed
+      .labelsHidden() // Hide labels if you only want the picker
     }
-    .datePickerStyle(CompactDatePickerStyle()) // Adjust style as needed
-    .labelsHidden() // Hide labels if you only want the picker
   }
 
   private func calculateTotal(for ownerName: String) -> Int {
@@ -155,14 +165,12 @@ struct GroupedTransactionView: View {
   private func fetchTransactions() {
     let transaction = transactionController.findAllTransaction(
       context: managedObjectContext,
-      date: selectedDate,
+      startDate: startDate,
+      endDate: endDate,
       groupingMethod: groupingMethod
     )
     transactions = transaction
     groupedTransactionItems = groupTransactionsByOwner(transactions: transactions)
-
-    print(Dictionary(grouping: transactions) { $0.payment })
-    // paid, transactionItems
   }
 
   private func groupTransactionsByOwner(transactions: [Transaction]) -> [String: [TransactionItemGroup]] {
